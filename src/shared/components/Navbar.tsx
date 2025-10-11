@@ -66,7 +66,7 @@ export const Navbar = () => {
                 <DropdownMenu key="resources">
                   <DropdownMenuTrigger asChild>
                     <button
-                      className={`text-sm font-medium flex items-center ${activeState}`}
+                      className={`relative text-sm font-medium transition-all duration-300 group z-10 flex items-center ${activeState}`}
                     >
                       <span className="relative z-10">{link.name}</span>
                       <svg
