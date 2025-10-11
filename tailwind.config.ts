@@ -11,7 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["var(--font-serif)", "serif"],
+        sans: ["var(--font-instrument-sans)", "sans-serif"], // ✅ Default font
+        serif: ["var(--font-serif)", "serif"], // Optional fallback
       },
       colors: {
         background: "var(--background)",

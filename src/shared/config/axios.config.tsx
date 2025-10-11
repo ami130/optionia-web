@@ -5,12 +5,23 @@ import "aos/dist/aos.css";
 
 export default function AOSInitializer() {
   useEffect(() => {
+    // Initialize only on client side
     AOS.init({
-      duration: 1000, // animation duration in ms
-      once: true, // animation happens only once
-      easing: "ease-in-out", // easing type
+      duration: 1000,
+      once: true,
+      easing: "ease-in-out",
     });
+
+    // Refresh AOS after page transitions (useful for Next.js)
+    const refreshAOS = () => {
+      setTimeout(() => {
+        AOS.refresh();
+      }, 500);
+    };
+
+    window.addEventListener("load", refreshAOS);
+    return () => window.removeEventListener("load", refreshAOS);
   }, []);
 
-  return null; // no UI output, just side effect
+  return null;
 }

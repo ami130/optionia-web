@@ -1,30 +1,22 @@
 import Footer from "@/shared/components/Footer";
 import { Navbar } from "@/shared/components/Navbar";
 import type { Metadata } from "next";
-import { Geist, Inter, Merriweather, Poppins } from "next/font/google";
+import { Instrument_Sans, Merriweather } from "next/font/google"; // ✅ import Instrument Sans
 import "./globals.css";
 import AOSInitializer from "@/shared/config/axios.config";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// ✅ Load Instrument Sans (for general body text)
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
+  variable: "--font-instrument-sans",
+  weight: ["400", "500", "600", "700"],
 });
 
+// ✅ Keep Merriweather for serif sections if needed
 const merriweather = Merriweather({
   subsets: ["latin"],
   variable: "--font-serif",
   weight: ["400", "700"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const poppins = Poppins({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -39,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${merriweather.className} antialiased`}>
+      <body
+        className={`${instrumentSans.variable} ${merriweather.variable} font-sans antialiased`}
+      >
         <Navbar />
         <AOSInitializer />
         {children}

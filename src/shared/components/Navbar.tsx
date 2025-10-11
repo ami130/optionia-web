@@ -1,20 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { img } from "../constant/imgExport";
 import { CommonPrimaryButton } from "./CommonButton";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   const navLinks = [
@@ -34,14 +30,47 @@ export const Navbar = () => {
 
   const isActive = (href: string) => pathname === href;
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsResourcesOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+    setIsResourcesOpen(false);
+  }, [pathname]);
+
+  const activeState = (href: string, isResource = false) => {
+    const isResourceActive =
+      isResource && resourceLinks.some((res) => isActive(res.href));
+    const active = isActive(href) || isResourceActive;
+
+    return active
+      ? "relative overflow-hidden rounded-md px-2 py-2 font-medium text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-100 before:origin-left before:transition-transform before:duration-500 before:ease-out before:rounded-md before:-z-10"
+      : "relative overflow-hidden rounded-md px-2 py-2 font-medium text-gray-700 hover:text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:ease-out hover:before:scale-x-100 before:rounded-md before:-z-10";
+  };
+
   return (
-    <nav className="bg-[#F6EEFF] backdrop-blur-md sticky top-0 z-50 border-[#E8D7FF]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ">
+    <nav className="bg-[#F6EEFF] backdrop-blur-md sticky top-0 z-50 ">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* -------- Left: Logo -------- */}
           <Link
             href="/"
-            className="flex items-center gap-2 border bg-white px-3 py-2 rounded-md shadow-sm"
+            className="flex items-center gap-2  bg-white px-3 py-2 rounded-md shadow-sm"
           >
             <Image src={img.logo} alt="Logo" className="w-auto h-6" />
             <p className="text-gray-300">|</p>
@@ -51,27 +80,24 @@ export const Navbar = () => {
           </Link>
 
           {/* -------- Center: Nav Links (Desktop) -------- */}
-          <div className="hidden md:flex items-center space-x-4 border py-2 px-2 rounded-xl bg-white shadow-sm">
+          <div className="hidden md:flex items-center space-x-4  py-2 px-2 rounded-xl bg-white shadow-sm">
             {navLinks.map((link) => {
-              const isResourceActive =
-                link.name === "Resources" &&
-                resourceLinks.some((res) => isActive(res.href));
-
-              const activeState =
-                isActive(link.href) || isResourceActive
-                  ? "relative overflow-hidden rounded-md px-2 py-2 font-medium text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-100 before:origin-left before:transition-transform before:duration-500 before:ease-out before:rounded-md before:-z-10"
-                  : "relative overflow-hidden rounded-md px-2 py-2 font-medium text-gray-700 hover:text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:ease-out hover:before:scale-x-100 before:rounded-md before:-z-10";
-
-              return link.name === "Resources" ? (
-                <DropdownMenu key="resources">
-                  <DropdownMenuTrigger asChild>
+              if (link.name === "Resources") {
+                return (
+                  <div key="resources" className="relative" ref={dropdownRef}>
                     <button
-                      className={`text-sm font-medium flex items-center ${activeState}`}
+                      onClick={() => setIsResourcesOpen(!isResourcesOpen)}
+                      className={`text-sm font-medium flex items-center ${activeState(
+                        link.href,
+                        true
+                      )}`}
                     >
                       <span className="relative z-10">{link.name}</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 ml-1 mt-0.5 relative z-10 transition-transform duration-200 group-hover:rotate-180"
+                        className={`w-4 h-4 ml-1 mt-0.5 relative z-10 transition-transform duration-200 ${
+                          isResourcesOpen ? "rotate-180" : ""
+                        }`}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -84,35 +110,36 @@ export const Navbar = () => {
                         />
                       </svg>
                     </button>
-                  </DropdownMenuTrigger>
 
-                  {/* -------- Dropdown Menu -------- */}
-                  <DropdownMenuContent
-                    align="start"
-                    className="mt-2 w-44 overflow-hidden rounded-md shadow-md bg-white border border-gray-100"
-                  >
-                    {resourceLinks.map((res) => (
-                      <DropdownMenuItem key={res.name} asChild>
-                        <Link
-                          href={res.href}
-                          className={`relative block px-2 py-1.5 text-sm rounded-md overflow-hidden transition-all duration-300 
-                            ${
+                    {/* -------- Dropdown Menu -------- */}
+                    {isResourcesOpen && (
+                      <div className="absolute top-full left-0 mt-2 w-44 overflow-hidden rounded-md shadow-md bg-white border border-gray-100 p-2 z-50">
+                        {resourceLinks.map((res) => (
+                          <Link
+                            key={res.name}
+                            href={res.href}
+                            className={`relative block w-full px-3 py-2 text-sm rounded-md overflow-hidden transition-all duration-300 mb-1 last:mb-0 ${
                               isActive(res.href)
                                 ? "text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-100 before:origin-left before:transition-transform before:duration-500 before:ease-out before:rounded-md before:-z-10"
                                 : "text-gray-700 hover:text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:ease-out hover:before:scale-x-100 before:rounded-md before:-z-10"
                             }`}
-                        >
-                          <span className="relative z-10">{res.name}</span>
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
+                          >
+                            <span className="relative z-10">{res.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`relative text-sm font-medium transition-all duration-300 group z-10 ${activeState}`}
+                  className={`relative text-sm font-medium transition-all duration-300 group z-10 ${activeState(
+                    link.href
+                  )}`}
                 >
                   <span className="relative z-10">{link.name}</span>
                 </Link>
@@ -172,7 +199,7 @@ export const Navbar = () => {
           isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-4 pb-4 pt-2 bg-white/95 backdrop-blur-md border-t border-gray-200 rounded-b-xl shadow-sm space-y-2 uppercase">
+        <div className="px-4 pb-4 pt-2 bg-white/95 backdrop-blur-md border-t border-gray-200 rounded-b-xl shadow-sm space-y-2">
           {navLinks.map((link) =>
             link.name === "Resources" ? (
               <div key="resources" className="rounded-lg overflow-hidden">
@@ -194,7 +221,7 @@ export const Navbar = () => {
                       />
                     </svg>
                   </summary>
-                  <div className="pl-5 mt-2 border-l border-purple-100 space-y-1 animate-accordion-down">
+                  <div className="pl-5 mt-2 border-l border-purple-100 space-y-1">
                     {resourceLinks.map((res) => (
                       <Link
                         key={res.name}

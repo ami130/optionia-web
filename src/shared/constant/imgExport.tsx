@@ -1,4 +1,3 @@
-import aboutImg from "../../../assets/about-img.avif";
 import aboutImg2 from "../../../assets/about-phone-card-granite.webp";
 import heroImg from "../../../assets/heroImg.png";
 import optioniaImg1 from "../../../assets/optionia_img1.png";
@@ -9,9 +8,16 @@ import shopifyIcon from "../../../assets/shopify.svg";
 import rightArrowIcon from "../../../assets/arrow-up-right.svg";
 import rightArrowWhiteIcon from "../../../assets/arrowRightWhite.svg";
 import logo from "../../../assets/logo.svg";
+import optionia1 from "../../../assets/optionia1.png";
+import optionia2 from "../../../assets/optionia2.png";
+import optionia3 from "../../../assets/optionia3.png";
+import optionia4 from "../../../assets/optionia4.png";
+import optionia5 from "../../../assets/optionia5.png";
+import optionia6 from "../../../assets/optionia6.png";
+import whiteImg from "../../../assets/white-image.png";
+
 
 export const img = {
-  aboutImg,
   aboutImg2,
   heroImg,
   codeIcon,
@@ -21,5 +27,12 @@ export const img = {
   rightArrowWhiteIcon,
   logo,
   optioniaImg1,
-  optioniaImg2
+  optioniaImg2,
+  optionia1,
+  optionia2,
+  optionia3,
+  optionia4,
+  optionia5,
+  optionia6,
+  whiteImg
 };

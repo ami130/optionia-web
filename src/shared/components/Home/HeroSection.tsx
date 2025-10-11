@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { img } from "@/shared/constant/imgExport";
 import Image from "next/image";
 import React from "react";
@@ -55,7 +54,6 @@ export default function HeroSection() {
               src={img.heroImg}
               alt="Hero Image"
               className="max-w-full h-auto"
-              placeholder="blur"
             />
           </div>
         </div>

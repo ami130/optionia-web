@@ -2,7 +2,6 @@
 
 import { Input } from "@/components/ui/input";
 import { Dribbble, Facebook, Instagram, Twitter } from "lucide-react";
-import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -161,13 +160,6 @@ export default function Footer() {
         <div className="col-span-2 space-x-2 ">
           <h3 className="text-white font-semibold mb-3">Add The desk</h3>
 
-          <Image
-            src="/placeholder-ad.png"
-            alt="Ad preview"
-            width={100}
-            height={60}
-            className="rounded"
-          />
           <p className="text-xs">
             Unite your creative team in one place. Share visual files & get
             feedback. Try it now.
