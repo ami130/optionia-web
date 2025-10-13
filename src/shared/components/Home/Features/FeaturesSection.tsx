@@ -115,14 +115,12 @@ export default function FeaturesStack() {
                   </div>
 
                   {/* Text */}
-                  <div className="py-7">
-                    <div className="lg:bg-white flex flex-col justify-center items-start h-full rounded-2xl px-9 space-y-3 text-center lg:text-left">
+                    <div className=" flex flex-col justify-center items-start h-full rounded-2xl px-9 space-y-3 text-center lg:text-left">
                       <h1 className="text-3xl font-semibold leading-snug">
                         {item.title}
                       </h1>
                       <p className="text-xs text-gray-400">{item.description}</p>
                     </div>
-                  </div>
                 </div>
               </div>
             </motion.div>
