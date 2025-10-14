@@ -15,7 +15,8 @@ import optionia4 from "../../../assets/optionia4.png";
 import optionia5 from "../../../assets/optionia5.png";
 import optionia6 from "../../../assets/optionia6.png";
 import whiteImg from "../../../assets/white-image.png";
-
+import work1 from "../../../assets/work1.png";
+import work2 from "../../../assets/work2.png";
 
 export const img = {
   aboutImg2,
@@ -34,5 +35,7 @@ export const img = {
   optionia4,
   optionia5,
   optionia6,
-  whiteImg
+  whiteImg,
+  work1,
+  work2,
 };

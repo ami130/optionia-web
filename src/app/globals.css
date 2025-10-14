@@ -12,6 +12,10 @@
   --color-secondaryColor: #f4f2ff;
   --color-secondaryTextColor: #2c076e;
 
+
+  /* Add your global gradient here */
+  --gradient-active-step: linear-gradient(to bottom, #6C47FF, #9C6BFF, #C084FC);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

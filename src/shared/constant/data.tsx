@@ -42,3 +42,34 @@ export const Features = [
     color: "#88A28D",
   },
 ];
+
+export const workData = [
+  {
+    id: 1,
+    title: "Hello Brother",
+    subtitle:
+      "Experience seamless collaboration with tools designed to keep your team connected and productive every day.",
+    img: img.work1,
+  },
+  {
+    id: 2,
+    title: "Creative Solutions",
+    subtitle:
+      "Empower your projects with smart, flexible solutions built to adapt and grow with your business goals.",
+    img: img.work2,
+  },
+  {
+    id: 3,
+    title: "Innovate Boldly",
+    subtitle:
+      "Turn ideas into impactful results through innovation, collaboration, and cutting-edge technology.",
+    img: img.work1,
+  },
+  {
+    id: 4,
+    title: "Empower Teams",
+    subtitle:
+      "Build stronger teams with tools that simplify communication, boost engagement, and enhance productivity.",
+    img: img.work2,
+  },
+];
