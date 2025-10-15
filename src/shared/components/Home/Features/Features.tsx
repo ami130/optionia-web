@@ -3,7 +3,7 @@ import FeaturesSection1 from "./FeaturesSection";
 
 export default function FeaturesSection() {
   return (
-    <div className="max-w-6xl mx-auto py-20 lg:px-10 px-2">
+    <div id="features" className="max-w-6xl mx-auto py-20 lg:px-10 px-2">
       <SectionHeader
         text="Features"
         title="Powerful Features to Customize, Optimize, and Grow Your Store"

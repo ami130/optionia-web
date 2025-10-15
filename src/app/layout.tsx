@@ -1,9 +1,9 @@
 import Footer from "@/shared/components/Footer";
-import { Navbar } from "@/shared/components/Navbar";
 import type { Metadata } from "next";
 import { Instrument_Sans, Merriweather } from "next/font/google"; // ✅ import Instrument Sans
-import "./globals.css";
 import AOSInitializer from "@/shared/config/axios.config";
+import { NavbarOption } from "@/shared/components/NavbarOption";
+import "./globals.css";
 
 // ✅ Load Instrument Sans (for general body text)
 const instrumentSans = Instrument_Sans({
@@ -34,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${instrumentSans.variable} ${merriweather.variable} font-sans antialiased`}
       >
-        <Navbar />
+        <NavbarOption />
         <AOSInitializer />
         {children}
         <Footer />

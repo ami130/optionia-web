@@ -17,6 +17,15 @@ import optionia6 from "../../../assets/optionia6.png";
 import whiteImg from "../../../assets/white-image.png";
 import work1 from "../../../assets/work1.png";
 import work2 from "../../../assets/work2.png";
+import chooseOption1 from "../../../assets/chooseOptionia1.svg";
+import chooseOption2 from "../../../assets/chooseOptionia2.svg";
+import chooseOption3 from "../../../assets/chooseOptionia3.svg";
+import chooseOption4 from "../../../assets/chooseOptionia4.svg";
+import bannerImg from "../../../assets/bannerImg.png";
+import support1 from "../../../assets/support1.svg";
+import support2 from "../../../assets/support2.svg";
+import support3 from "../../../assets/support3.svg";
+import support4 from "../../../assets/support4.svg";
 
 export const img = {
   aboutImg2,
@@ -38,4 +47,13 @@ export const img = {
   whiteImg,
   work1,
   work2,
+  chooseOption1,
+  chooseOption2,
+  chooseOption3,
+  chooseOption4,
+  bannerImg,
+  support1,
+  support2,
+  support3,
+  support4,
 };

@@ -5,7 +5,10 @@ import { workData } from "@/shared/constant/data";
 
 export default function HowItWorksSection() {
   return (
-    <div className="max-w-6xl mx-auto py-20 lg:px-10 px-2 space-y-12">
+    <div
+      id="how-it-works"
+      className="max-w-6xl mx-auto py-20 lg:px-10 px-2 space-y-12"
+    >
       <SectionHeader
         text="How it works"
         title="Set up your product options in minutes

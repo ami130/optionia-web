@@ -6,7 +6,10 @@ import { CommonPrimaryButton, CommonSecondaryButton } from "../CommonButton";
 
 export default function HeroSection() {
   return (
-    <section className="bg-[linear-gradient(180deg,_#F6EEFF_0%,_rgba(249,249,255,0)_100%)]">
+    <section
+      id="home"
+      className="bg-[linear-gradient(180deg,_#F6EEFF_0%,_rgba(249,249,255,0)_100%)]"
+    >
       <div className="max-w-6xl mx-auto py-20 lg:px-10 px-2">
         <div className="lg:grid grid-cols-2 gap-4 items-center justify-center space-y-5 lg:space-y-0">
           {/* First Section */}

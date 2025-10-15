@@ -15,56 +15,61 @@ export default function OptioniaSection2() {
     "relative z-10 transition-transform duration-500 group-hover:scale-105 w-full h-auto object-contain";
 
   return (
-    <section className="bg-secondPrimaryColor px-4 sm:px-6 md:px-10 lg:p-20 py-10 space-y-10">
-      {/* ----------- Row 1 ----------- */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">
-        {/* Left text section */}
-        <div
-          data-aos="zoom-in"
-          className="col-span-2 bg-white rounded-2xl py-9 px-14"
-        >
-          <div className="space-y-4">
-            <SectionHeaderPortion text="Option Types" />
-            <h1 className="text-4xl text-secondaryTextColor">
-              The Options Your Customers Will Love
-            </h1>
+    <section className="bg-secondPrimaryColor px-4 sm:px-6 md:px-10 lg:p-20 py-10 ">
+      <div className="max-w-6xl mx-auto space-y-6">
+        
+        {/* ----------- Row 1 ----------- */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">
+          {/* Left text section */}
+          <div
+            data-aos="zoom-in"
+            className="col-span-2 bg-white rounded-2xl py-9 px-14"
+          >
+            <div className="space-y-4">
+              <div className="flex">
+                <SectionHeaderPortion text="Option Types" />
+              </div>
+              <h1 className="text-4xl text-secondaryTextColor">
+                The Options Your Customers Will Love
+              </h1>
+            </div>
+            <div className="mt-4 flex items-center gap-3 hover:underline transition-all">
+              {" "}
+              <Link href={"/"}>See all options</Link>{" "}
+              <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />{" "}
+            </div>{" "}
           </div>
-          <div className="mt-4 flex items-center gap-3 hover:underline transition-all">
-            {" "}
-            <Link href={"/"}>See all options</Link>{" "}
-            <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />{" "}
-          </div>{" "}
+
+          {/* Right image cards */}
+          <div className="col-span-2 grid grid-cols-2 gap-4 sm:gap-6">
+            {[img.optionia1, img.optionia2].map((image, i) => (
+              <div key={i} className={hoverCardClass}>
+                <div className={glowOverlayClass} />
+                <Image
+                  src={image}
+                  alt={`optionia${i + 1}`}
+                  className={imageClass}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Right image cards */}
-        <div className="col-span-2 grid grid-cols-2 gap-4 sm:gap-6">
-          {[img.optionia1, img.optionia2].map((image, i) => (
-            <div key={i} className={hoverCardClass}>
-              <div className={glowOverlayClass} />
-              <Image
-                src={image}
-                alt={`optionia${i + 1}`}
-                className={imageClass}
-              />
-            </div>
-          ))}
+        {/* ----------- Row 2 ----------- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {[img.optionia3, img.optionia4, img.optionia5, img.optionia6].map(
+            (image, i) => (
+              <div key={i} className={hoverCardClass}>
+                <div className={glowOverlayClass} />
+                <Image
+                  src={image}
+                  alt={`optionia${i + 3}`}
+                  className={imageClass}
+                />
+              </div>
+            )
+          )}
         </div>
-      </div>
-
-      {/* ----------- Row 2 ----------- */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        {[img.optionia3, img.optionia4, img.optionia5, img.optionia6].map(
-          (image, i) => (
-            <div key={i} className={hoverCardClass}>
-              <div className={glowOverlayClass} />
-              <Image
-                src={image}
-                alt={`optionia${i + 3}`}
-                className={imageClass}
-              />
-            </div>
-          )
-        )}
       </div>
     </section>
   );

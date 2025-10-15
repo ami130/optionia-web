@@ -73,3 +73,70 @@ export const workData = [
     img: img.work2,
   },
 ];
+
+export const chooseOptionia = [
+  {
+    id: 1,
+    title: "24/6 Support",
+    subtitle:
+      "Our dedicated support team is always here to help six days a week.",
+    img: img.chooseOption1,
+  },
+  {
+    id: 2,
+    title: "Free Version Available",
+    subtitle: "Start customizing your products right away with our free plan.",
+    img: img.chooseOption2,
+  },
+  {
+    id: 3,
+    title: "No Coding Required",
+    subtitle: "No developers, no hassle just plug in and start customizing",
+    img: img.chooseOption3,
+  },
+  {
+    id: 4,
+    title: "Easy to Use",
+    subtitle: "Optionia is built for everyone  from beginners to experts.",
+    img: img.chooseOption4,
+  },
+];
+
+export const supportData = [
+  {
+    id: 1,
+    title: "Live Chat Support",
+    subtitle:
+      "Chat with our support team directly from your dashboard for instant help and real-time solutions.",
+    img: img.support1,
+    link: "/",
+    buttonText: "Chat Now",
+  },
+  {
+    id: 2,
+    title: "Email Support",
+    subtitle:
+      "Reach out anytime at support@optionia.com we typically reply within a few hours.",
+    img: img.support2,
+    link: "/",
+    buttonText: "Email Us",
+  },
+  {
+    id: 3,
+    title: "Video Tutorials",
+    subtitle:
+      "Watch easy-to-follow video tutorials that guide you through setup, customization, and advanced features.",
+    img: img.support3,
+    link: "/",
+    buttonText: "Watch Videos",
+  },
+  {
+    id: 4,
+    title: "Help Center",
+    subtitle:
+      "Visit our Help Center for step-by-step guides, tutorials, and tips to make the most of Optionia.",
+    img: img.support4,
+    link: "/",
+    buttonText: "Visit Help Center",
+  },
+];

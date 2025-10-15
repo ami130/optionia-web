@@ -24,9 +24,7 @@ export default function WorksSubSection({ data }: { data: any }) {
               className="absolute left-0 inset-y-0 w-[2px] rounded-full transition-all duration-500 "
               style={{
                 background:
-                  active === step.id
-                    ? "var(--gradient-active-step)"
-                    : "",
+                  active === step.id ? "var(--gradient-active-step)" : "",
               }}
             ></span>
 
@@ -78,7 +76,7 @@ export default function WorksSubSection({ data }: { data: any }) {
       <div className="relative w-full flex justify-center items-center">
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeStep.id}
+         key={activeStep.id}
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -40 }}
@@ -88,13 +86,11 @@ export default function WorksSubSection({ data }: { data: any }) {
             <Image
               src={activeStep.img}
               alt={activeStep.title}
-              className="w-full h-auto object-cover rounded-2xl border"
-              width={600}
-              height={400}
+              className="w-full h-auto object-fill rounded-2xl border"
             />
           </motion.div>
         </AnimatePresence>
-      </div>
+      </div>   
     </div>
   );
 }

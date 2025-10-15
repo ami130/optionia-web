@@ -76,7 +76,7 @@ export default function FaqSection({
         <Accordion
           type="single"
           collapsible
-          className="space-y-3 cursor-pointer"
+          className="space-y-3"
         >
           {items.map((item) => (
             <AccordionItem
@@ -84,7 +84,7 @@ export default function FaqSection({
               value={item.id}
               className="border bg-white text-secondaryTextColor px-6 py-2 rounded-2xl"
             >
-              <AccordionTrigger className="font-semibold hover:no-underline text-left">
+              <AccordionTrigger className="font-semibold hover:no-underline text-left cursor-pointer">
                 {item.question}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">

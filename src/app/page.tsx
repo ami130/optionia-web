@@ -4,16 +4,24 @@ import HeroSection from "@/shared/components/Home/HeroSection";
 import HowItWorksSection from "@/shared/components/Home/works/HowItWorksSection";
 import OptioniaSection from "@/shared/components/Home/OptioniaSection";
 import OptioniaSection2 from "@/shared/components/Home/OptioniaSection2";
+import ChooseOptioniaSection from "@/shared/components/Home/ChooseOptionia/ChooseOptioniaSection";
+import BannerSection from "@/shared/components/Home/BannerSection";
+import SupportSection from "@/shared/components/Home/Support/SupportSection";
 
 export default function Home() {
   return (
     <div>
       <HeroSection />
-      <OptioniaSection />
-      <OptioniaSection2 />
+      <div id="option-types">
+        <OptioniaSection />
+        <OptioniaSection2 />
+      </div>
       <FeaturesSection />
       <FaqSection />
       <HowItWorksSection />
+      <ChooseOptioniaSection />
+      <BannerSection />
+      <SupportSection />
     </div>
   );
 }
