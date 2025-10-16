@@ -1,10 +1,17 @@
 import Image from "next/image";
-import React from "react";
 
-export function CommonPrimaryButton({ text, img }: { text: string; img: any }) {
+export function CommonPrimaryButton({
+  text,
+  img,
+  className = "",
+}: {
+  text: string;
+  img: any;
+  className?: string;
+}) {
   return (
     <button
-      className="
+      className={`
         group relative px-5 py-2
         flex items-center justify-center gap-2
         rounded-[10px]
@@ -17,7 +24,8 @@ export function CommonPrimaryButton({ text, img }: { text: string; img: any }) {
         hover:bg-[position:right_center]
         hover:scale-[1.03]
         active:scale-[0.98]
-      "
+        ${className}
+      `}
     >
       <span className="z-10">{text}</span>
       <span

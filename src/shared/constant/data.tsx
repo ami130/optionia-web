@@ -140,3 +140,166 @@ export const supportData = [
     buttonText: "Visit Help Center",
   },
 ];
+
+export const pricingPlans = [
+  {
+    id: 1,
+    planTitle: "Free",
+    plan: "Free Forever",
+    price: 0,
+    yearlyPrice: 0,
+    type: "month",
+    yearType: "year",
+    currency: "$",
+    popular: false,
+    features: [
+      {
+        id: 1,
+        title: "Free Hosting",
+        active: true,
+        description: "Basic hosting for small projects",
+      },
+      {
+        id: 2,
+        title: "1GB Storage",
+        active: true,
+        description: "Limited storage space",
+      },
+      {
+        id: 3,
+        title: "Basic Support",
+        active: true,
+        description: "Community forum support",
+      },
+      {
+        id: 4,
+        title: "Custom Domain",
+        active: false,
+        description: "Use your own domain name",
+      },
+      {
+        id: 5,
+        title: "Premium Templates",
+        active: false,
+        description: "Access to premium templates",
+      },
+    ],
+    buttonText: "Get Started Free",
+    buttonVariant: "secondary",
+  },
+  {
+    id: 2,
+    planTitle: "Pro",
+    plan: "14 Days Trial",
+    price: 19,
+    yearlyPrice: 199, // discounted yearly price
+    type: "month",
+    yearType: "year",
+    currency: "$",
+    popular: true,
+    features: [
+      {
+        id: 1,
+        title: "Unlimited Hosting",
+        active: true,
+        description: "Host unlimited projects",
+      },
+      {
+        id: 2,
+        title: "50GB Storage",
+        active: true,
+        description: "Ample storage space",
+      },
+      {
+        id: 3,
+        title: "Priority Support",
+        active: true,
+        description: "24/7 priority support",
+      },
+      {
+        id: 4,
+        title: "Custom Domain",
+        active: true,
+        description: "Use your own domain name",
+      },
+      {
+        id: 5,
+        title: "Premium Templates",
+        active: true,
+        description: "Access to premium templates",
+      },
+      {
+        id: 6,
+        title: "Advanced Analytics",
+        active: true,
+        description: "Detailed performance analytics",
+      },
+    ],
+    buttonText: "Start Free Trial",
+    buttonVariant: "primary",
+  },
+  {
+    id: 3,
+    planTitle: "Enterprise",
+    plan: "Custom Solution",
+    price: 49,
+    yearlyPrice: 499, // discounted yearly price
+    type: "month",
+    yearType: "year",
+    currency: "$",
+    popular: false,
+    features: [
+      {
+        id: 1,
+        title: "Unlimited Hosting",
+        active: true,
+        description: "Host unlimited projects",
+      },
+      {
+        id: 2,
+        title: "500GB Storage",
+        active: true,
+        description: "Massive storage capacity",
+      },
+      {
+        id: 3,
+        title: "Dedicated Support",
+        active: true,
+        description: "Personal account manager",
+      },
+      {
+        id: 4,
+        title: "Custom Domain",
+        active: true,
+        description: "Multiple custom domains",
+      },
+      {
+        id: 5,
+        title: "Premium Templates",
+        active: true,
+        description: "All premium templates included",
+      },
+      {
+        id: 6,
+        title: "Advanced Analytics",
+        active: true,
+        description: "Real-time analytics dashboard",
+      },
+      {
+        id: 7,
+        title: "API Access",
+        active: true,
+        description: "Full API integration",
+      },
+      {
+        id: 8,
+        title: "White Label",
+        active: true,
+        description: "White label solutions",
+      },
+    ],
+    buttonText: "Contact Sales",
+    buttonVariant: "secondary",
+  },
+];
+

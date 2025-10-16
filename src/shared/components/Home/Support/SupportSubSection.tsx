@@ -12,10 +12,10 @@ export default function SupportSubSection({ data }: { data: any[] }) {
           key={item.id}
           className={`p-6 pe-0 space-y-5 transition-all duration-300 ease-in-out
               ${index === 0 ? "" : "lg:border-l-2 border-l-0"} 
-              border-gray-200`}
+              border-primaryColor`}
         >
           {/* Icon Section */}
-          <div className="w-10 h-10 p-1 rounded-xl flex items-center justify-center bg-secondPrimaryColor border">
+          <div className="w-10 h-10 p-1 rounded-xl flex items-center justify-center bg-[#F2E9FE] border-2 border-primaryColor">
             <Image
               src={item.img}
               alt={item.title}
@@ -39,7 +39,7 @@ export default function SupportSubSection({ data }: { data: any[] }) {
             className="flex items-center gap-1 text-gray-700 font-medium transition-colors duration-200 hover:text-baseColor"
           >
             <span>{item.buttonText}</span>
-            <IoIosArrowRoundForward className="w-6 h-6" /> {/* 24x24 */}
+            <IoIosArrowRoundForward className="w-6 h-6" />
           </Link>
         </div>
       ))}

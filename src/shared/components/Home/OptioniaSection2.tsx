@@ -16,7 +16,7 @@ export default function OptioniaSection2() {
 
   return (
     <section className="bg-secondPrimaryColor px-4 sm:px-6 md:px-10 lg:p-20 py-10 ">
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-6 lg:px-3">
         
         {/* ----------- Row 1 ----------- */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">

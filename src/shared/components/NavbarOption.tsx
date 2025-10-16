@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,13 +14,12 @@ export const NavbarOption = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Single page sections - all on home page
   const navLinks = [
     { name: "Home", href: "/#home", id: "home" },
     { name: "Option types", href: "/#option-types", id: "option-types" },
     { name: "Features", href: "/#features", id: "features" },
     { name: "How it works", href: "/#how-it-works", id: "how-it-works" },
-    { name: "Resources", href: "#", id: "resources" }, // Keep as dropdown
+    { name: "Resources", href: "#", id: "resources" },
     { name: "Pricing", href: "/#pricing", id: "pricing" },
   ];
 
@@ -31,13 +29,10 @@ export const NavbarOption = () => {
     { name: "Support", href: "/resources/support" },
   ];
 
-  // Check if any resource link is active
   const isResourcesActive = resourceLinks.some((res) => pathname === res.href);
 
-  // Check if we're on home section
   const isHomeSection = activeSection === "home" && pathname === "/";
 
-  // Intersection Observer to detect active section on scroll
   useEffect(() => {
     const sections = navLinks
       .filter((link) => link.id !== "resources")
@@ -46,7 +41,7 @@ export const NavbarOption = () => {
 
     const observerOptions = {
       root: null,
-      rootMargin: "-20% 0px -70% 0px", // Adjust these values to change when section becomes active
+      rootMargin: "-20% 0px -70% 0px",
       threshold: 0,
     };
 
@@ -54,7 +49,6 @@ export const NavbarOption = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id);
-          // Update URL hash without triggering scroll
           window.history.replaceState(null, "", `/#${entry.target.id}`);
         }
       });
@@ -71,7 +65,6 @@ export const NavbarOption = () => {
     };
   }, [pathname]);
 
-  // Handle smooth scrolling for hash links on initial load and direct navigation
   useEffect(() => {
     const handleHashChange = (url: string) => {
       const hash = url.split("#")[1];
@@ -90,7 +83,6 @@ export const NavbarOption = () => {
       }
     };
 
-    // Check if we're on home page with hash
     if (pathname === "/" && window.location.hash) {
       handleHashChange(window.location.hash);
     } else if (pathname === "/" && !window.location.hash) {
@@ -140,7 +132,8 @@ export const NavbarOption = () => {
   };
 
   const activeState = (href: string, isResource = false) => {
-    const isResourceActive = isResource && resourceLinks.some((res) => pathname === res.href);
+    const isResourceActive =
+      isResource && resourceLinks.some((res) => pathname === res.href);
     const active = isSectionActive(href) || isResourceActive;
 
     return active
@@ -171,9 +164,11 @@ export const NavbarOption = () => {
   };
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-      isHomeSection ? "bg-[#F6EEFF]" : "bg-none"
-    }`}>
+    <nav
+      className={`sticky top-0 pt-2.5 z-50 transition-all duration-300 ${
+        isHomeSection ? "bg-[#F6EEFF]" : "bg-none"
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* -------- Left: Logo -------- */}
