@@ -14,7 +14,7 @@ const Loading = () => {
   return (
     <>
       <div className="flex items-center justify-center h-screen">
-        <BounceLoader color="#0291FA" loading={true} speedMultiplier={2} />
+        <BounceLoader color="#6d1fd8" loading={true} speedMultiplier={2} />
       </div>
     </>
   );
