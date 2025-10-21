@@ -8,6 +8,8 @@ import ChooseOptioniaSection from "@/shared/components/Home/ChooseOptionia/Choos
 import BannerSection from "@/shared/components/Home/BannerSection";
 import SupportSection from "@/shared/components/Home/Support/SupportSection";
 import PricingSection from "@/shared/components/Home/Pricing/PricingSection";
+import BlogSection from "@/shared/components/Home/Blog/BlogSection";
+import Testmonial from "@/shared/components/Home/Testmonial/Testmonial";
 
 export default function Home() {
   return (
@@ -21,9 +23,11 @@ export default function Home() {
       <FaqSection />
       <HowItWorksSection />
       <ChooseOptioniaSection />
-      <BannerSection />
       <SupportSection />
       <PricingSection />
+      <BlogSection />
+      <BannerSection />
+      <Testmonial />
     </div>
   );
 }

@@ -27,6 +27,10 @@ import support2 from "../../../assets/support2.svg";
 import support3 from "../../../assets/support3.svg";
 import support4 from "../../../assets/support4.svg";
 import pricingImg from "../../../assets/pricingPlan.png";
+import blog1 from "../../../assets/blog1.png";
+import blog2 from "../../../assets/blog2.png";
+import blog3 from "../../../assets/blog3.png";
+import star from "../../../assets/star.png";
 
 export const img = {
   aboutImg2,
@@ -58,4 +62,8 @@ export const img = {
   support3,
   support4,
   pricingImg,
+  blog1,
+  blog2,
+  blog3,
+  star,
 };

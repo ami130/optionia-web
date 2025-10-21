@@ -12,6 +12,7 @@ export function CommonPrimaryButton({
   return (
     <button
       className={`
+        cursor-pointer
         group relative px-5 py-2
         flex items-center justify-center gap-2
         rounded-[10px]
@@ -57,6 +58,7 @@ export function CommonSecondaryButton({
   return (
     <button
       className="
+      cursor-pointer
         group relative px-5 py-2
         flex items-center justify-center gap-2
         rounded-[10px]

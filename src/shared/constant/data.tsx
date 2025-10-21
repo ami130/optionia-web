@@ -197,3 +197,56 @@ export const pricingPlans = [
   },
 ];
 
+export const blogData = [
+  {
+    id: 1,
+    category: "Growth",
+    title: "How to Use Product Customization as an Upselling Strategy",
+    date: "November 01, 2025",
+    readTime: "7 min read",
+    image: img.blog1,
+    link: "/blog/how-to-use-product-customization",
+  },
+  {
+    id: 2,
+    category: "E-commerce",
+    title: "Boost Your Sales with Personalization Techniques",
+    date: "October 25, 2025",
+    readTime: "5 min read",
+    image: img.blog2 || img.blog1, // fallback if missing
+    link: "/blog/boost-your-sales",
+  },
+  {
+    id: 3,
+    category: "Marketing",
+    title: "Top 10 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
+    image: img.blog3 || img.blog1,
+    link: "/blog/customer-retention-2025",
+  },
+];
+
+// footerHeaderData.ts (or inside FooterHeader.tsx)
+export const footerHeaderData = [
+  {
+    id: 1,
+    title: "Unlimited Options",
+    image: img.star, // or img.star if using imports
+  },
+  {
+    id: 2,
+    title: "Effortless",
+    image: img.star,
+  },
+  {
+    id: 3,
+    title: "Boost Sale",
+    image: img.star,
+  },
+  {
+    id: 4,
+    title: "Product",
+    image: img.star,
+  },
+];

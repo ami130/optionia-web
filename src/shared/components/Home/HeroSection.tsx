@@ -37,11 +37,21 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center  justify-center lg:justify-start gap-4 mt-5">
                 <div className="flex item-center gap-2">
-                  <Image src={img.versionIcon} alt="Version Icon" />
+                  <Image
+                    src={img.versionIcon}
+                    alt="Version Icon"
+                    height={10}
+                    width={18}
+                  />
                   <p>Free version available</p>
                 </div>
                 <div className="flex item-center gap-2">
-                  <Image src={img.codeIcon} alt="Version Icon" />
+                  <Image
+                    src={img.codeIcon}
+                    alt="Version Icon"
+                    height={10}
+                    width={18}
+                  />
                   <p>No coding required</p>
                 </div>
               </div>
@@ -57,6 +67,8 @@ export default function HeroSection() {
               src={img.heroImg}
               alt="Hero Image"
               className="max-w-full h-auto"
+              height={10}
+              width={648}
             />
           </div>
         </div>

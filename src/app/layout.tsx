@@ -1,9 +1,12 @@
 import Footer from "@/shared/components/Footer";
 import type { Metadata } from "next";
-import { Instrument_Sans, Merriweather } from "next/font/google"; // ✅ import Instrument Sans
+import { Instrument_Sans, Merriweather } from "next/font/google";
 import AOSInitializer from "@/shared/config/axios.config";
 import { NavbarOption } from "@/shared/components/NavbarOption";
+import FooterHeader from "@/shared/components/FooterHeader";
 import "./globals.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // ✅ Load Instrument Sans (for general body text)
 const instrumentSans = Instrument_Sans({
@@ -37,6 +40,7 @@ export default function RootLayout({
         <NavbarOption />
         <AOSInitializer />
         {children}
+        <FooterHeader />
         <Footer />
       </body>
     </html>

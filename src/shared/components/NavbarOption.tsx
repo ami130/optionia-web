@@ -29,6 +29,7 @@ export const NavbarOption = () => {
     { name: "Support", href: "/resources/support" },
   ];
 
+
   const isResourcesActive = resourceLinks.some((res) => pathname === res.href);
 
   const isHomeSection = activeSection === "home" && pathname === "/";

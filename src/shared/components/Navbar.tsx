@@ -30,6 +30,9 @@ export const Navbar = () => {
 
   const isActive = (href: string) => pathname === href;
 
+  console.log(pathname, "pathname");
+  console.log(isActive, "isActive");
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
