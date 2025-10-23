@@ -65,7 +65,7 @@ export default function FeaturesStack() {
       style={{ height: `${features.length * 100}vh` }}
     >
       {/* Sticky viewport where cards will stack */}
-      <div className="sticky top-8 h-screen flex items-center justify-center overflow-hidden">
+      <div className="sticky top-4 h-screen flex items-center justify-center overflow-hidden">
         {features.map((item, index) => {
           const start = index / features.length;
           const end = (index + 1) / features.length;
@@ -74,7 +74,7 @@ export default function FeaturesStack() {
           const translateY = useTransform(
             scrollYProgress,
             [start, end],
-            index === 0 ? ["0%", "0%"] : ["100%", "0%"]
+            index === 0 ? ["00%", "0%"] : ["100%", "0%"]
           );
 
           // const opacity = useTransform(
@@ -98,12 +98,16 @@ export default function FeaturesStack() {
               {/* Card content (replicates your SampleF markup) */}
               <div className={`max-w-6xl w-full `}>
                 <div
-                  className={`grid grid-cols-1 md:grid-cols-2  lg:gap-32 p-8 rounded-4xl ${item.bgColor}`}
+                  className={`grid grid-cols-1 md:grid-cols-2 lg:gap-32 p-8 rounded-4xl ${item.bgColor}`}
                 >
                   {/* Image */}
-                  <div className={`${item.reverse ? "md:order-2" : ""} rounded-2xl `}>
+                  <div
+                    className={`${
+                      item.reverse ? "md:order-2" : ""
+                    } rounded-2xl `}
+                  >
                     {/* If your next/image requires fixed sizes you can set width/height here */}
-                    
+
                     <Image
                       src={item.image}
                       alt={item.title}

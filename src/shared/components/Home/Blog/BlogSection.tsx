@@ -1,7 +1,6 @@
 import { blogData } from "@/shared/constant/data";
 import SectionHeader from "../../SectionHeader";
 import BlogList from "./BlogList";
-import BlogListSecond from "./BlogListSecond";
 
 export default function BlogSection() {
   return (
@@ -12,7 +11,6 @@ export default function BlogSection() {
         subtitle="Strategies, Insights, and Tools to Navigate the Options Market Like a Pro"
       />
       <BlogList data={blogData} />
-      <BlogListSecond data={blogData} />
     </div>
   );
 }

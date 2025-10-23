@@ -69,9 +69,9 @@ export default function Footer() {
               </a>
             </div>
 
-            <div className="flex items-center bg-[#360C5F] text-white rounded-[12px] overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 w-fit">
+            <div className="flex items-center gap-2 ps-4 py-2 pe-3 bg-[#360C5F] text-white rounded-[12px] overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 w-fit">
               {/* Email Section */}
-              <div className="flex items-center gap-2 ps-4 py-2 pe-3">
+              <div className="flex items-center gap-2 ">
                 <CiMail className="text-[20px]" />
                 <h1 className="text-[15px] font-medium">{email}</h1>
               </div>
@@ -102,7 +102,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="col-span-4 flex justify-between gap-9 ">
+          <div className="col-span-4 lg:flex justify-between gap-9 space-y-10 lg:space-y-0 ">
             {/* The Product */}
             <div>
               <h3 className="text-[#1E0A52] font-medium mb-8">Product</h3>

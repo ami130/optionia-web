@@ -204,8 +204,10 @@ export const blogData = [
     title: "How to Use Product Customization as an Upselling Strategy",
     date: "November 01, 2025",
     readTime: "7 min read",
-    image: img.blog1,
+    image: img.blog5,
     link: "/blog/how-to-use-product-customization",
+    order: 1,
+    featured: true, // featured item
   },
   {
     id: 2,
@@ -213,8 +215,10 @@ export const blogData = [
     title: "Boost Your Sales with Personalization Techniques",
     date: "October 25, 2025",
     readTime: "5 min read",
-    image: img.blog2 || img.blog1, // fallback if missing
+    image: img.blog6 || img.blog1,
     link: "/blog/boost-your-sales",
+    order: 2,
+    featured: true, // featured item
   },
   {
     id: 3,
@@ -222,8 +226,32 @@ export const blogData = [
     title: "Top 10 Strategies to Increase Customer Retention in 2025",
     date: "October 10, 2025",
     readTime: "6 min read",
+    image: img.blog5 || img.blog1,
+    link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
+  },
+  {
+    id: 4,
+    category: "Marketing",
+    title: "Top 10 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
     image: img.blog3 || img.blog1,
     link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
+  },
+  {
+    id: 5,
+    category: "Marketing",
+    title: "Top 10 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
+    image: img.blog3 || img.blog1,
+    link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
   },
 ];
 

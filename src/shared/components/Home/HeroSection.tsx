@@ -17,9 +17,9 @@ export default function HeroSection() {
             <div className="flex justify-center lg:justify-start">
               <SectionHeaderPortion text="Shopify product options app" />
             </div>
-            <p className="text-5xl font-semibold text-secondaryTextColor leading-tight py-4">
+            <h1 className="text-5xl font-semibold text-secondaryTextColor leading-tight py-4">
               Unlimited Product Options to your Shopify Stores
-            </p>
+            </h1>
             <p className="text-sm text-gray-500">
               Easily create as many product options and variants as you want all
               customized for what your customers love.

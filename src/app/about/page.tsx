@@ -6,8 +6,9 @@ export default function AboutPage() {
   return (
     <div className="px-4 lg:px-0 ">
       <PageHeader
-        header="Engineering Toward a Trillion Enterprise Interactions"
-        description=" Combining frontier AI research with real-world scale, Giga builds
+        subtitle="hello"
+        text="Engineering Toward a Trillion Enterprise Interactions"
+        title=" Combining frontier AI research with real-world scale, Giga builds
           voice agents enterprises can trust."
       />
       {/* <Image

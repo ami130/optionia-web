@@ -1,21 +1,25 @@
-import { blogPosts } from "@/data/dummyData";
-import BlogList from "@/shared/components/Home/Blog/BlogList";
+import BlogCardListWithFeatured from "@/shared/components/globalComponents/BlogCardListWithFeatured";
 import PageHeader from "@/shared/components/PageHeader";
 import { blogData } from "@/shared/constant/data";
-import Image from "next/image";
-import Link from "next/link";
 
 export default function BlogPage() {
   return (
-    <div className="px-4 lg:px-0">
+    <div className="max-w-6xl mx-auto py-20 lg:px-8 px-5 space-y-12">
       <PageHeader
+        text="Blog Page"
+        title="Optionia Blog"
+        subtitle="Start customizing your products today and watch your Shopify sales grow."
+      />
+      <BlogCardListWithFeatured data={blogData} />
+      {/* <BlogSection /> */}
+      {/* <PageHeader
         header="Engineering Toward a Trillion Enterprise Interactions"
         description="Combining frontier AI research with real-world  scale, Giga builds
           voice agents enterprises can trust."
       />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <BlogList data={blogData} />
-      </div>
+      </div> */}
     </div>
   );
 }

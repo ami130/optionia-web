@@ -125,23 +125,28 @@ export const NavbarOption = () => {
   }, [pathname]);
 
   // Check if a section is active based on current scroll position
-  const isSectionActive = (href: string) => {
-    if (href === "/") return activeSection === "home";
+  const isSectionActive = (href: string, id?: string) => {
+    // --- Case 1: Hash-based homepage sections (/ #home etc.) ---
+    if (href.startsWith("/#")) {
+      const hash = href.split("#")[1];
+      return pathname === "/" && activeSection === hash;
+    }
 
-    const hash = href.split("#")[1];
-    return hash === activeSection;
+    // --- Case 2: Dynamic route pages (/blog, /service, etc.) ---
+    const basePath = href.split("/")[1]; // e.g. "blog" from "/blog"
+    const currentPath = pathname.split("/")[1]; // e.g. "blog" from "/blog/abc"
+
+    return basePath && basePath === currentPath;
   };
 
   const activeState = (href: string, isResource = false) => {
-    const isResourceActive =
-      isResource && resourceLinks.some((res) => pathname === res.href);
-    const active = isSectionActive(href) || isResourceActive;
+    const isActive = isSectionActive(href);
+    const active = isActive || (isResource && pathname.startsWith(href));
 
     return active
       ? "relative overflow-hidden rounded-md px-2 py-2 font-medium text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-100 before:origin-left before:transition-transform before:duration-500 before:ease-out before:rounded-md before:-z-10"
       : "relative overflow-hidden rounded-md px-2 py-2 font-medium text-gray-700 hover:text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:ease-out hover:before:scale-x-100 before:rounded-md before:-z-10";
   };
-
   // Handle navigation for single page sections or full routes
   const handleNavClick = (href: string, id: string) => {
     // --- For hash-based home sections ---

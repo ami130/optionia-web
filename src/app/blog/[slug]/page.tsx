@@ -9,84 +9,55 @@ async function getBlog(id: string) {
     description:
       "Combining frontier AI research with real-world scale, Giga builds voice agents enterprises can trust.",
     content: `
-    <p>In today's rapidly evolving digital landscape, enterprises are constantly seeking innovative solutions to streamline operations and enhance customer experiences. AI-driven voice technology is leading this transformation.</p>
+   <p>
+    <span style="font-size: 18px;">Quill Rich Text Editor</span>
+</p>
+<p>
+    <br>
+</p>
 
-    <h2>Why Voice Technology Matters</h2>
-    <p>Voice interfaces allow users to interact naturally, making processes faster and more intuitive. Companies leveraging AI voice agents report improved efficiency and customer satisfaction.</p>
-
-    <div class="my-6">
-      <img src="/api/placeholder/800/400" alt="Voice Technology" class="rounded-xl w-full object-cover" />
-    </div>
-
-    <h3>Key Benefits of AI Voice Agents</h3>
-    <ul class="list-disc ml-6 space-y-2">
-      <li>24/7 customer support without additional staffing costs</li>
-      <li>Faster response times and fewer errors</li>
-      <li>Consistent and scalable customer experience</li>
-      <li>Integration with CRM and other enterprise tools</li>
-    </ul>
-
-    <br/>
-    
-    <h3>How It Works</h3>
-    <br/>
-
-    <ol class="list-decimal ml-6 space-y-2">
-      <li>Speech input is captured from the user</li>
-      <li>Natural language processing interprets the intent</li>
-      <li>AI generates a contextual response</li>
-      <li>Response is delivered via voice or chat</li>
-    </ol>
-
-    <blockquote class="border-l-4 border-purple-500 pl-4 italic my-6 text-gray-700">
-      "The integration of AI voice technology has transformed our customer service. It’s faster, smarter, and more personal than ever."
-      <cite class="block mt-2 text-sm font-semibold">- Sarah Chen, CTO of TechCorp</cite>
-    </blockquote>
-
-    <h3>Performance Metrics</h3>
-
-    <table class="table-auto border border-gray-300 w-full my-6 text-left">
-      <thead>
-        <tr class="bg-gray-100">
-          <th class="px-4 py-2">Metric</th>
-          <th class="px-4 py-2">Before AI</th>
-          <th class="px-4 py-2">After AI</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="px-4 py-2">Average Response Time</td>
-          <td class="px-4 py-2">12 min</td>
-          <td class="px-4 py-2">2 min</td>
-        </tr>
-        <tr>
-          <td class="px-4 py-2">Customer Satisfaction</td>
-          <td class="px-4 py-2">72%</td>
-          <td class="px-4 py-2">91%</td>
-        </tr>
-        <tr>
-          <td class="px-4 py-2">Support Costs</td>
-          <td class="px-4 py-2">$120k/month</td>
-          <td class="px-4 py-2">$75k/month</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>Sample Code Integration</h3>
-    <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto">
-<code>
-const voiceAgent = new AIVoiceAgent();
-voiceAgent.listen();
-voiceAgent.respond("How can I help you today?");
-</code>
-    </pre>
-
-    <h3>Conclusion</h3>
-    <p>AI-powered voice agents are transforming the way enterprises interact with customers. From efficiency gains to improved satisfaction, adopting this technology is critical for scaling modern businesses.</p>
-
-    <div class="my-6">
-      <img src="/api/placeholder/800/400" alt="Future of AI" class="rounded-xl w-full object-cover" />
-    </div>
+<p>
+    <br>
+</p>
+<blockquote>Fast and lightweight</blockquote>
+<ul>
+    <li>Semantic markup</li>
+    <li>Standardized HTML between browsers</li>
+    <li>Cross browser support including Chrome, Firefox, Safari, and IE 9+</li>
+</ul>
+<p>
+    <br>
+</p>
+<p>
+    <span style="font-size: 18px;">Downloads</span>
+</p>
+<p>
+    <br>
+</p>
+<ul>
+    <li>
+        <a href="https://quilljs.com" target="_blank">Quill.js</a>, the free, open source WYSIWYG editor</li>
+    <li>
+        <a href="https://zenoamaro.github.io/react-quill" target="_blank">React-quill</a>, a React component that wraps Quill.js</li>
+</ul>
+<p>
+    <br>
+</p>
+<p class="ql-align-justify">
+    <s style="font-size: large; color: rgb(230, 0, 0); background-color: rgb(255, 255, 102);">sdfcsdhfklsdj</s>
+</p>
+<p class="ql-align-justify">
+    <span style="font-size: large;">sadasdjkas</span>
+</p>
+<p class="ql-align-justify">
+    <span style="font-size: large;">asdas</span>
+</p>
+<p>
+    <br>
+</p>
+<blockquote>l
+    <span style="font-family: monospace;">orem5000000000000000000000000000 DSCDSL JCSKLJC SCKJLHSDA KCS;KMhsac sdj schdsncbshjbcn</span>
+</blockquote>
   `,
     image: "/api/placeholder/800/400",
     author: "John Doe",

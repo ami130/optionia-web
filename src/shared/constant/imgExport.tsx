@@ -30,6 +30,8 @@ import pricingImg from "../../../assets/pricingPlan.png";
 import blog1 from "../../../assets/blog1.png";
 import blog2 from "../../../assets/blog2.png";
 import blog3 from "../../../assets/blog3.png";
+import blog5 from "../../../assets/blog5.png";
+import blog6 from "../../../assets/blog6.png";
 import star from "../../../assets/star.png";
 
 export const img = {
@@ -66,4 +68,6 @@ export const img = {
   blog2,
   blog3,
   star,
+  blog5,
+  blog6,
 };
