@@ -1,114 +1,208 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import { CalendarDays, User } from "lucide-react";
+import BlogContentClient from "./BlogContentClient";
 
-export default function BlogDetails() {
+// Simulate server-side fetching
+async function getBlog(id: string) {
+  // Replace this with your actual DB/API call
+  return {
+    id,
+    title: "Engineering Toward a Trillion Enterprise Interactions",
+    description:
+      "Combining frontier AI research with real-world scale, Giga builds voice agents enterprises can trust.",
+    content: `
+    <p>In today's rapidly evolving digital landscape, enterprises are constantly seeking innovative solutions to streamline operations and enhance customer experiences. AI-driven voice technology is leading this transformation.</p>
+
+    <h2>Why Voice Technology Matters</h2>
+    <p>Voice interfaces allow users to interact naturally, making processes faster and more intuitive. Companies leveraging AI voice agents report improved efficiency and customer satisfaction.</p>
+
+    <div class="my-6">
+      <img src="/api/placeholder/800/400" alt="Voice Technology" class="rounded-xl w-full object-cover" />
+    </div>
+
+    <h3>Key Benefits of AI Voice Agents</h3>
+    <ul class="list-disc ml-6 space-y-2">
+      <li>24/7 customer support without additional staffing costs</li>
+      <li>Faster response times and fewer errors</li>
+      <li>Consistent and scalable customer experience</li>
+      <li>Integration with CRM and other enterprise tools</li>
+    </ul>
+
+    <br/>
+    
+    <h3>How It Works</h3>
+    <br/>
+
+    <ol class="list-decimal ml-6 space-y-2">
+      <li>Speech input is captured from the user</li>
+      <li>Natural language processing interprets the intent</li>
+      <li>AI generates a contextual response</li>
+      <li>Response is delivered via voice or chat</li>
+    </ol>
+
+    <blockquote class="border-l-4 border-purple-500 pl-4 italic my-6 text-gray-700">
+      "The integration of AI voice technology has transformed our customer service. It’s faster, smarter, and more personal than ever."
+      <cite class="block mt-2 text-sm font-semibold">- Sarah Chen, CTO of TechCorp</cite>
+    </blockquote>
+
+    <h3>Performance Metrics</h3>
+
+    <table class="table-auto border border-gray-300 w-full my-6 text-left">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-4 py-2">Metric</th>
+          <th class="px-4 py-2">Before AI</th>
+          <th class="px-4 py-2">After AI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="px-4 py-2">Average Response Time</td>
+          <td class="px-4 py-2">12 min</td>
+          <td class="px-4 py-2">2 min</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">Customer Satisfaction</td>
+          <td class="px-4 py-2">72%</td>
+          <td class="px-4 py-2">91%</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">Support Costs</td>
+          <td class="px-4 py-2">$120k/month</td>
+          <td class="px-4 py-2">$75k/month</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Sample Code Integration</h3>
+    <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto">
+<code>
+const voiceAgent = new AIVoiceAgent();
+voiceAgent.listen();
+voiceAgent.respond("How can I help you today?");
+</code>
+    </pre>
+
+    <h3>Conclusion</h3>
+    <p>AI-powered voice agents are transforming the way enterprises interact with customers. From efficiency gains to improved satisfaction, adopting this technology is critical for scaling modern businesses.</p>
+
+    <div class="my-6">
+      <img src="/api/placeholder/800/400" alt="Future of AI" class="rounded-xl w-full object-cover" />
+    </div>
+  `,
+    image: "/api/placeholder/800/400",
+    author: "John Doe",
+    date: "December 15, 2023",
+    readTime: "8 min read",
+  };
+}
+
+interface Props {
+  params: { id: string };
+}
+
+export default async function BlogPage({ params }: Props) {
+  const blogPost = await getBlog(params.id);
+
   return (
-    <section className="px-4 md:px-8 lg:px-16 py-16">
-      {/* Blog Header */}
-      <div
-        data-aos="fade-up"
-        className="max-w-4xl mx-auto text-center space-y-4 mb-10"
-      >
-        <h1 className="text-3xl md:text-5xl font-serif font-semibold tracking-wide">
-          Engineering Toward a Trillion Enterprise Interactions
-        </h1>
-        <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-          <div className="flex items-center gap-1">
-            <User size={16} />
-            <span>By John Doe</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <CalendarDays size={16} />
-            <span>October 5, 2025</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Featured Image */}
-      <div
-        data-aos="zoom-in"
-        className="relative max-w-5xl mx-auto w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-lg"
-      >
-        <Image
-          src="/images/blog-cover.jpg" // 👈 replace with your actual image
-          alt="Blog Featured Image"
-          fill
-          className="object-cover"
-        />
-      </div>
-
-      {/* Blog Content */}
-      <article
-        data-aos="fade-up"
-        data-aos-delay="100"
-        className="max-w-3xl mx-auto mt-10 text-gray-700 leading-relaxed space-y-6 text-sm sm:text-base"
-      >
-        <p>
-          Artificial intelligence is transforming how enterprises interact with
-          customers. By blending frontier research with scalable systems, we are
-          designing AI agents that communicate naturally, reliably, and
-          securely. Our goal: enable a trillion meaningful enterprise
-          interactions across voice and digital channels.
-        </p>
-
-        <h2 className="text-xl font-serif font-semibold mt-8">
-          Voice as the Future of Enterprise AI
-        </h2>
-        <p>
-          Voice remains the most intuitive interface for human communication.
-          The next wave of AI agents will harness speech understanding and
-          synthesis to build human-like empathy and responsiveness in enterprise
-          contexts. This evolution requires innovations in real-time inference,
-          multimodal learning, and context-aware reasoning.
-        </p>
-
-        <blockquote className="border-l-4 border-base pl-4 italic text-gray-600">
-          “AI should amplify human capability, not replace it. The best systems
-          feel natural, trustworthy, and deeply contextual.”
-        </blockquote>
-
-        <h2 className="text-xl font-serif font-semibold mt-8">
-          The Challenge of Scale
-        </h2>
-        <p>
-          Building AI that can handle billions of voice interactions requires
-          more than accuracy—it demands resilience, low latency, and seamless
-          integration with enterprise infrastructure. At Giga, we deploy models
-          optimized for production-grade throughput, enabling reliable
-          large-scale deployment without compromising quality.
-        </p>
-
-        <p>
-          As enterprises embrace conversational AI, the focus is shifting from
-          proof-of-concept to impact—reducing support costs, improving customer
-          satisfaction, and automating routine workflows while maintaining a
-          personal touch.
-        </p>
-      </article>
-
-      {/* Author Box */}
-      <div
-        data-aos="fade-up"
-        data-aos-delay="200"
-        className="max-w-3xl mx-auto mt-16 bg-gray-50 dark:bg-neutral-900 border border-base/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6"
-      >
-        <Image
-          src="/images/author.jpg" // 👈 replace with author image
-          alt="Author"
-          width={100}
-          height={100}
-          className="rounded-full object-cover"
-        />
-        <div className="text-center sm:text-left space-y-2">
-          <h3 className="text-lg font-semibold">John Doe</h3>
-          <p className="text-sm text-gray-500">
-            Senior AI Engineer at Giga. Passionate about language models,
-            multimodal systems, and building human-like digital experiences.
-          </p>
-        </div>
-      </div>
-    </section>
+    <div>
+      {/* Pass blogPost to a Client Component */}
+      <BlogContentClient blogPost={blogPost} />
+    </div>
   );
 }
+
+// "use client";
+// import { motion, useSpring, useScroll } from "framer-motion";
+
+// export default function BlogDetailPage() {
+//   const { scrollYProgress } = useScroll();
+
+//   // Smooth animation
+//   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
+//   const blogPost = {
+//     id: 1,
+//     title: "Engineering Toward a Trillion Enterprise Interactions",
+//     description:
+//       "Combining frontier AI research with real-world scale, Giga builds voice agents enterprises can trust.",
+//     content: `
+//       <p>In today's rapidly evolving digital landscape, enterprises are constantly seeking innovative solutions to streamline their operations and enhance customer interactions. The integration of artificial intelligence has become paramount in achieving these goals.</p>
+
+//       <p>Voice technology, in particular, has emerged as a game-changer for businesses looking to scale their customer service operations while maintaining a personal touch. With advancements in natural language processing and machine learning, voice agents can now understand context, detect emotions, and provide personalized responses.</p>
+
+//       <h2>The Future of Enterprise Communication</h2>
+
+//       <p>As we move toward a future where trillion-scale interactions become the norm, the need for reliable, scalable AI solutions has never been more critical. Traditional customer service models simply cannot keep up with the volume and complexity of modern enterprise demands.</p>
+
+//       <p>Our research indicates that companies implementing AI-powered voice agents experience:</p>
+
+//       <ul>
+//         <li>40% reduction in customer service costs</li>
+//         <li>65% improvement in response times</li>
+//         <li>85% customer satisfaction rates</li>
+//         <li>24/7 availability across global markets</li>
+//       </ul>
+
+//       <h3>Building Trust Through Technology</h3>
+
+//       <p>Trust remains the cornerstone of any successful enterprise interaction. Our voice agents are designed with multiple layers of security and privacy protection, ensuring that sensitive business information remains confidential while delivering exceptional service quality.</p>
+
+//       <blockquote>
+//         "The integration of AI voice technology has transformed how we interact with our customers. The scalability and reliability have exceeded our expectations."
+//         <cite>- Sarah Chen, CTO of TechCorp</cite>
+//       </blockquote>
+
+//       <p>Looking ahead, we're excited about the potential for even more sophisticated interactions. The combination of voice technology with other emerging technologies like augmented reality and IoT will create entirely new paradigms for enterprise communication.</p>
+//     `,
+//     image: "/api/placeholder/800/400",
+//     author: "John Doe",
+//     date: "December 15, 2023",
+//     readTime: "8 min read",
+//     category: "Technology",
+//     tags: ["AI", "Enterprise", "Voice Technology", "Innovation"],
+//   };
+
+//   const relatedPosts = [
+//     {
+//       id: 2,
+//       title: "The Future of AI in Customer Service",
+//       image: "/api/placeholder/400/200",
+//       date: "December 10, 2023",
+//       readTime: "5 min read",
+//     },
+//     {
+//       id: 3,
+//       title: "Building Scalable Enterprise Solutions",
+//       image: "/api/placeholder/400/200",
+//       date: "December 5, 2023",
+//       readTime: "6 min read",
+//     },
+//     {
+//       id: 4,
+//       title: "Voice Technology Trends 2024",
+//       image: "/api/placeholder/400/200",
+//       date: "November 28, 2023",
+//       readTime: "7 min read",
+//     },
+//   ];
+
+//   return (
+//     <div className="relative">
+//       {/* Top Progress Bar */}
+//       <motion.div
+//         className="fixed top-0 left-0 right-0 h-1 bg-purple-500 origin-left z-50"
+//         style={{ scaleX }}
+//       />
+
+//       {/* Blog Content */}
+//       <div className="max-w-4xl mx-auto py-24 px-4 lg:px-0 space-y-6">
+//         <h1 className="text-4xl font-bold mb-6">Blog Title</h1>
+//         {[...Array(50)].map((_, i) => (
+//           <p key={i} className="mb-4">
+//             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque,
+//             hic?
+//           </p>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }

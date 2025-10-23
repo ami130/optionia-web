@@ -4,7 +4,7 @@ import SectionHeaderPortion from "./SectionHeaderPortion";
 export default function SectionHeader({
   text,
   title,
-  subtitle
+  subtitle,
 }: {
   text?: string;
   title: string;
@@ -16,7 +16,9 @@ export default function SectionHeader({
       className="max-w-2xl mx-auto flex flex-col items-center text-center space-y-4"
     >
       <SectionHeaderPortion text={text} />
-      <h1 className="text-3xl text-secondaryTextColor font-semibold">{title}</h1>
+      <h1 className="text-3xl text-secondaryTextColor font-semibold">
+        {title}
+      </h1>
       <p className="text-sm ">{subtitle}</p>
     </div>
   );

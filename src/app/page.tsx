@@ -31,3 +31,51 @@ export default function Home() {
     </div>
   );
 }
+
+// import { homeData } from "@/lib/constants";
+// import { DynamicSectionRenderer } from "@/shared/components/test/DynamicSectionRenderer";
+
+// async function getSections() {
+//   try {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/sections`, {
+//       next: {
+//         revalidate: 60, // Revalidate every 60 seconds
+//       },
+//     });
+
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch sections");
+//     }
+
+//     return res.json();
+//   } catch (error) {
+//     console.error("Error fetching sections:", error);
+//     return [];
+//   }
+// }
+
+// export default async function HomePage() {
+//   // const sections = await getSections();
+//   // console.log("first", sections);
+
+//   return (
+//     <main className="min-h-screen">
+//       {homeData.length > 0 ? (
+//         homeData.map((section: any) => (
+//           <DynamicSectionRenderer key={section.id} section={section} />
+//         ))
+//       ) : (
+//         <div className="flex items-center justify-center min-h-screen">
+//           <div className="text-center">
+//             <h1 className="text-2xl font-bold text-gray-900 mb-4">
+//               No Sections Found
+//             </h1>
+//             <p className="text-gray-600">
+//               Add sections to your constants file to see them here.
+//             </p>
+//           </div>
+//         </div>
+//       )}
+//     </main>
+//   );
+// }

@@ -19,7 +19,8 @@ export const NavbarOption = () => {
     { name: "Option types", href: "/#option-types", id: "option-types" },
     { name: "Features", href: "/#features", id: "features" },
     { name: "How it works", href: "/#how-it-works", id: "how-it-works" },
-    { name: "Resources", href: "#", id: "resources" },
+    // { name: "Resources", href: "#", id: "resources" },
+    { name: "Blogs", href: "/blog", id: "blog" },
     { name: "Pricing", href: "/#pricing", id: "pricing" },
   ];
 
@@ -28,7 +29,6 @@ export const NavbarOption = () => {
     { name: "Tutorials", href: "/resources/tutorials" },
     { name: "Support", href: "/resources/support" },
   ];
-
 
   const isResourcesActive = resourceLinks.some((res) => pathname === res.href);
 
@@ -142,14 +142,13 @@ export const NavbarOption = () => {
       : "relative overflow-hidden rounded-md px-2 py-2 font-medium text-gray-700 hover:text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:ease-out hover:before:scale-x-100 before:rounded-md before:-z-10";
   };
 
-  // Handle navigation for single page sections
+  // Handle navigation for single page sections or full routes
   const handleNavClick = (href: string, id: string) => {
+    // --- For hash-based home sections ---
     if (href.startsWith("/#")) {
-      // If we're not on home page, navigate to home page with hash
       if (pathname !== "/") {
         router.push(href);
       } else {
-        // Already on home page, just scroll to section
         const element = document.getElementById(id);
         if (element) {
           setActiveSection(id);
@@ -157,10 +156,13 @@ export const NavbarOption = () => {
             behavior: "smooth",
             block: "start",
           });
-          // Update URL without page reload
           window.history.pushState(null, "", `/#${id}`);
         }
       }
+    }
+    // --- For full routes like /blog ---
+    else {
+      router.push(href);
     }
   };
 

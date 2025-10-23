@@ -1,5 +1,7 @@
 import { blogPosts } from "@/data/dummyData";
+import BlogList from "@/shared/components/Home/Blog/BlogList";
 import PageHeader from "@/shared/components/PageHeader";
+import { blogData } from "@/shared/constant/data";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,55 +13,12 @@ export default function BlogPage() {
         description="Combining frontier AI research with real-world  scale, Giga builds
           voice agents enterprises can trust."
       />
-      <section className="py-16 bg-[#f9f9f9]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-10">
-            {blogPosts.map((post) => (
-              <div
-                key={post.id}
-                data-aos="fade-up"
-                data-aos-delay={post.id * 100}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
-              > 
-                <div className="relative h-56 w-full">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                <div className="p-6 space-y-3">
-                  <p className="text-xs uppercase text-gray-500">
-                    {post.date} · {post.author}
-                  </p>
-
-                  <h2 className="text-lg font-serif font-semibold text-gray-900">
-                    {post.title}
-                  </h2>
-
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {post.description}
-                  </p>
-
-                  <Link
-                    href={`/blog/abc`}
-                    className="mt-3 text-sm font-medium text-[#001524] hover:underline"
-                  >
-                    Read more →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <BlogList data={blogData} />
+      </div>
     </div>
   );
 }
-
-
 
 // import React from "react";
 // import Image from "next/image";
