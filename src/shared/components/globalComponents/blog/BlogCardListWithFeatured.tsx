@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CiCalendar, CiClock1 } from "react-icons/ci";
-import SectionHeaderPortion from "../SectionHeaderPortion";
+import SectionHeaderPortion from "../../SectionHeaderPortion";
 import { blogData } from "@/shared/constant/data";
 
 export default function BlogCardListWithFeatured({ data }: { data: any }) {
@@ -34,16 +34,22 @@ export default function BlogCardListWithFeatured({ data }: { data: any }) {
 }
 
 // Reusable Blog Card Component
-function BlogCard({ blog, gridColumns }: { blog: (typeof blogData)[0]; gridColumns: 2 | 3 }) {
+function BlogCard({
+  blog,
+  gridColumns,
+}: {
+  blog: (typeof blogData)[0];
+  gridColumns: 2 | 3;
+}) {
   // Dynamic image height based on grid columns
   const imageHeight = gridColumns === 2 ? "h-[367px]" : "h-[240px]";
-  
+
   // Aspect ratio classes for consistent proportions
   const aspectRatioClass = "aspect-[4/3]"; // 4:3 aspect ratio
 
   return (
     <Link
-      href={"blog/abc"}
+      href={blog.link}
       className="col-span-1 mx-auto group cursor-pointer w-full"
     >
       {/* Image with hover effect and consistent aspect ratio */}
@@ -55,7 +61,7 @@ function BlogCard({ blog, gridColumns }: { blog: (typeof blogData)[0]; gridColum
           height={600}
           className={`rounded-2xl w-full ${imageHeight} object-cover transition-transform duration-500 ease-in-out group-hover:scale-105`}
           style={{
-            aspectRatio: '4/3' // Ensures consistent ratio across different screen sizes
+            aspectRatio: "4/3", // Ensures consistent ratio across different screen sizes
           }}
         />
       </div>
@@ -65,13 +71,11 @@ function BlogCard({ blog, gridColumns }: { blog: (typeof blogData)[0]; gridColum
         <div className="flex">
           <SectionHeaderPortion text={blog.category} />
         </div>
-        <div>
-          <Link href={blog.link}>
-            <h1 className="text-lg font-semibold text-gray-900 transition-all duration-300 hover:underline">
-              {blog.title}
-            </h1>
-          </Link>
-        </div>
+        <Link href={blog.link}>
+          <h1 className="text-lg font-semibold text-gray-900 transition-all duration-300 hover:underline">
+            {blog.title}
+          </h1>
+        </Link>
 
         <div className="flex items-center gap-3 text-gray-600 text-sm">
           <div className="flex items-center gap-1">

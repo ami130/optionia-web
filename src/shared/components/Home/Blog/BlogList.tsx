@@ -1,16 +1,18 @@
 import { img } from "@/shared/constant/imgExport";
-import Image from "next/image";
 import React from "react";
-import SectionHeaderPortion from "../../SectionHeaderPortion";
-import { CiCalendar, CiClock1 } from "react-icons/ci";
 import { CommonSecondaryButton } from "../../CommonButton";
 import Link from "next/link";
-import BlogCardList from "../../globalComponents/BlogCardList";
+import BlogCardList from "../../globalComponents/blog/BlogCardList";
 
 export default function BlogList({ data }: { data: any }) {
   return (
     <div>
-      <BlogCardList data={data} />
+      {/* Grid Wrapper */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-5 lg:px-0">
+        {data?.slice(0, 3)?.map((blog: any) => (
+          <BlogCardList key={blog.id} blog={blog} />
+        ))}
+      </div>
 
       {/* View All Button */}
       <div className="mt-12 flex justify-center">

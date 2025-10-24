@@ -6,9 +6,10 @@ export default function ContactPage() {
     <div className="px-4 lg:px-0">
       {/* Page Header */}
       <PageHeader
-        header="Let’s Build the Future of Voice Together"
-        description="Have a project, partnership idea, or want to learn more about Giga’s AI voice agents? 
+        text="Let’s Build the Future of Voice Together"
+        subtitle="Have a project, partnership idea, or want to learn more about Giga’s AI voice agents? 
         Get in touch with our team — we’d love to hear from you."
+        title="hello"
       />
 
       {/* Contact Section */}
@@ -22,8 +23,8 @@ export default function ContactPage() {
             Contact Information
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-            Reach out to our team via email, phone, or visit our office. We’ll respond
-            as soon as possible.
+            Reach out to our team via email, phone, or visit our office. We’ll
+            respond as soon as possible.
           </p>
 
           <div className="space-y-4">
