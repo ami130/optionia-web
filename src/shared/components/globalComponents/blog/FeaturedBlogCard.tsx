@@ -2,14 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionHeaderPortion from "../../SectionHeaderPortion";
 import { CiCalendar, CiClock1 } from "react-icons/ci";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"; // make sure path is correct
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-export default function BlogCardList({ blog }: { blog: any }) {
+export default function FeaturedBlogCard({ blog }: { blog: any }) {
   return (
     <Link
       href={blog?.link}
@@ -17,7 +12,7 @@ export default function BlogCardList({ blog }: { blog: any }) {
       className="col-span-1 group cursor-pointer w-full flex flex-col"
     >
       {/* Image */}
-      <div className="relative w-full rounded-2xl overflow-hidden aspect-[16/9] lg:aspect-auto lg:h-[240px]">
+      <div className="relative w-full rounded-2xl overflow-hidden aspect-[16/9] lg:aspect-auto lg:h-[367px]">
         <Image
           src={blog.image}
           alt={blog.title}
@@ -27,11 +22,11 @@ export default function BlogCardList({ blog }: { blog: any }) {
         />
       </div>
 
-      {/* Blog Content */}
+      {/* Content */}
       <div className="space-y-3 mt-5">
         <SectionHeaderPortion text={blog.category} />
 
-        {/* Title with Shadcn Tooltip */}
+        {/* Title with shadcn Tooltip */}
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -39,13 +34,11 @@ export default function BlogCardList({ blog }: { blog: any }) {
                 {blog.title}
               </h2>
             </TooltipTrigger>
-            <TooltipContent side="top" align="center" className="max-w-xs">
-              {blog.title}
-            </TooltipContent>
+            <TooltipContent className="max-w-xs">{blog.title}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
 
-        {/* Date & Read Time */}
+        {/* Date & Read time */}
         <div className="flex items-center gap-3 text-gray-600 text-sm sm:text-base">
           <div className="flex items-center gap-1">
             <CiCalendar />

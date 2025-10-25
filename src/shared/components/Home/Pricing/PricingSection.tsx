@@ -3,10 +3,7 @@ import PricingPlanSubSection from "./PricingPlanSubSection";
 
 export default function PricingSection() {
   return (
-    <section
-      id="pricing"
-      className="py-20 lg:px-14 bg-[#FAF6FE]"
-    >
+    <section id="pricing" className="py-20 lg:px-14 bg-[#FAF6FE]">
       <div className="container max-w-6xl mx-auto lg:px-0 px-4">
         <div className="mb-12">
           <SectionHeader

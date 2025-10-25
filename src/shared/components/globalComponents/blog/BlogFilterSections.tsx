@@ -84,12 +84,12 @@ export default function BlogFilterSections() {
             : "hidden opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="flex flex-wrap items-center gap-4 relative border-b-2 border-gray-200 transition-all duration-500 ease-in-out">
+        <div className="flex flex-wrap items-center gap-4 relative lg:border-b-2 border-gray-200 transition-all duration-500 ease-in-out">
           {visibleCategories.map((cat, index) => (
             <button
               key={cat}
               onClick={() => setActiveTab(cat)}
-              className={`px-3 py-3 text-lg font-medium cursor-pointer -mb-0.5 relative z-10 transition-all duration-500 ease-in-out delay-[${
+              className={`px-1 lg:px-3 py-3 text-lg font-medium cursor-pointer -mb-0.5 relative z-10 transition-all duration-500 ease-in-out delay-[${
                 index * 50
               }ms] ${
                 activeTab === cat
@@ -108,8 +108,8 @@ export default function BlogFilterSections() {
                 onClick={handleMoreClick}
                 className={`inline-flex px-4 py-3 items-center text-lg font-medium cursor-pointer border-b-2 transition-all duration-300 relative z-20 ${
                   moreCategories.includes(activeTab)
-                    ? "text-[#9E77ED] border-b-2 border-[#9E77ED]" // <-- active color with border
-                    : "border-transparent text-[#360C5F]" // <-- inactive
+                    ? "text-[#9E77ED] border-b-2 border-[#9E77ED]" // active if open OR item selected
+                    : "border-transparent text-[#360C5F]" // inactive
                 }`}
               >
                 More
@@ -163,7 +163,7 @@ export default function BlogFilterSections() {
       <div
         ref={searchRef}
         className={`flex items-center gap-2 transition-all duration-500 ease-in-out rounded-[8px] relative z-10 ${
-          isFocused ? "w-full ml-0" : "w-[320px] ml-auto"
+          isFocused ? "w-full ml-0" : "w-full lg:w-[320px] ml-auto"
         }`}
         style={{
           padding: "12px 14px",

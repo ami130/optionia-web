@@ -223,7 +223,7 @@ export const blogData = [
   {
     id: 3,
     category: "Marketing",
-    title: "Top 10 Strategies to Increase Customer Retention in 2025",
+    title: "Top 1 Strategies to Increase Customer Retention in 2025",
     date: "October 10, 2025",
     readTime: "6 min read",
     image: img.blog3 || img.blog1,
@@ -234,7 +234,7 @@ export const blogData = [
   {
     id: 4,
     category: "Marketing",
-    title: "Top 10 Strategies to Increase Customer Retention in 2025",
+    title: "Top 2 Strategies to Increase Customer Retention in 2025",
     date: "October 10, 2025",
     readTime: "6 min read",
     image: img.blog6 || img.blog1,
@@ -245,7 +245,73 @@ export const blogData = [
   {
     id: 5,
     category: "Marketing",
-    title: "Top 10 Strategies to Increase Customer Retention in 2025",
+    title: "Top 3 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
+    image: img.blog5,
+    link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
+  },
+  {
+    id: 5,
+    category: "Marketing",
+    title: "Top 4 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
+    image: img.blog5,
+    link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
+  },
+  {
+    id: 5,
+    category: "Marketing",
+    title: "Top 5 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
+    image: img.blog5,
+    link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
+  },
+  {
+    id: 5,
+    category: "Marketing",
+    title: "Top 6 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
+    image: img.blog5,
+    link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
+  },
+  {
+    id: 5,
+    category: "Marketing",
+    title: "Top 7 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
+    image: img.blog5,
+    link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
+  },
+  {
+    id: 5,
+    category: "Marketing",
+    title: "Top 8 Strategies to Increase Customer Retention in 2025",
+    date: "October 10, 2025",
+    readTime: "6 min read",
+    image: img.blog5,
+    link: "/blog/customer-retention-2025",
+    order: 3,
+    featured: false, // not featured
+  },
+  {
+    id: 5,
+    category: "Marketing",
+    title: "Top 9 Strategies to Increase Customer Retention in 2025",
     date: "October 10, 2025",
     readTime: "6 min read",
     image: img.blog5,

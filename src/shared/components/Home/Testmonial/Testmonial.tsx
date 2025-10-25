@@ -45,15 +45,15 @@ export default function Testmonial() {
       { breakpoint: 1536, settings: { slidesToShow: 2 } }, // 2xl
       { breakpoint: 1280, settings: { slidesToShow: 2 } }, // xl
       { breakpoint: 1024, settings: { slidesToShow: 2 } }, // lg
-      { breakpoint: 768, settings: { slidesToShow: 1 } },  // md
-      { breakpoint: 640, settings: { slidesToShow: 1 } },  // sm
-      { breakpoint: 480, settings: { slidesToShow: 1 } },  // xs
+      { breakpoint: 768, settings: { slidesToShow: 1 } }, // md
+      { breakpoint: 640, settings: { slidesToShow: 1 } }, // sm
+      { breakpoint: 480, settings: { slidesToShow: 1 } }, // xs
     ],
   };
 
   return (
     <section className="w-full bg-white">
-      <div className="max-w-7xl mx-auto py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
+      <div className="max-w-6xl mx-auto py-16 sm:py-20 md:py-24 px-4  lg:px-8  ">
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-10 items-center">
           {/* === LEFT FIXED SECTION === */}
           <div className="lg:col-span-2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
