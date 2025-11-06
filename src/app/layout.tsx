@@ -1,7 +1,7 @@
 import Footer from "@/shared/components/Footer";
 import type { Metadata } from "next";
 import { Instrument_Sans, Merriweather } from "next/font/google";
-import AOSInitializer from "@/shared/config/axios.config";
+import AOSInitializer from "@/shared/config/aos.config";
 import { NavbarOption } from "@/shared/components/NavbarOption";
 import FooterHeader from "@/shared/components/FooterHeader";
 import "./globals.css";

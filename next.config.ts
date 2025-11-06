@@ -1,7 +1,13 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "optionia-backend.onrender.com", // Allows images from any HTTPS domain
+        // hostname: "**", // Allows images from any HTTPS domain
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

@@ -1,27 +1,9 @@
-"use client";
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import axios from "axios";
 
-export default function AOSInitializer() {
-  useEffect(() => {
-    // Initialize only on client side
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: "ease-in-out",
-    });
+import { ENV_CONFIG } from "@/shared/constant/app.constant";
 
-    // Refresh AOS after page transitions (useful for Next.js)
-    const refreshAOS = () => {
-      setTimeout(() => {
-        AOS.refresh();
-      }, 500);
-    };
+const axiosInstance = axios.create({
+  baseURL: ENV_CONFIG.baseApi,
+});
 
-    window.addEventListener("load", refreshAOS);
-    return () => window.removeEventListener("load", refreshAOS);
-  }, []);
-
-  return null;
-}
+export default axiosInstance;

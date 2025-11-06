@@ -3,25 +3,18 @@ import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, LucideSearch } from "lucide-react";
 import { createPortal } from "react-dom";
 
-const categories = [
-  "Technology",
-  "Health",
-  "Business",
-  "Sports",
-  "Travel",
-  "Food",
-  "Education",
-  "Fashion",
-  "Entertainment",
-  "Ecommerce insights",
-  "Customer experience",
-  "Art",
-];
+export default function BlogFilterSections({
+  categoriesData,
+}: {
+  categoriesData: any[];
+}) {
+  const categories = categoriesData?.map((cat) => cat.name) || [];
 
-export default function BlogFilterSections() {
   const [isFocused, setIsFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [activeTab, setActiveTab] = useState(categories[0]);
+  const [activeTab, setActiveTab] = useState(
+    categories.length ? categories[0] : ""
+  );
   const [moreOpen, setMoreOpen] = useState(false);
   const [showCategories, setShowCategories] = useState(true);
   const [dropdownPos, setDropdownPos] = useState<{
@@ -36,13 +29,13 @@ export default function BlogFilterSections() {
   const visibleCategories = categories.slice(0, 5);
   const moreCategories = categories.slice(5);
 
-  // Focus input handler
+  // 🧩 Focus handler
   const handleFocus = () => {
     setIsFocused(true);
     setShowCategories(false);
   };
 
-  // Click outside handler
+  // 🧩 Click outside handler
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
@@ -61,7 +54,7 @@ export default function BlogFilterSections() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Open More dropdown and calculate position
+  // 🧩 Handle More dropdown positioning
   const handleMoreClick = () => {
     if (moreRef.current) {
       const rect = moreRef.current.getBoundingClientRect();
@@ -108,8 +101,8 @@ export default function BlogFilterSections() {
                 onClick={handleMoreClick}
                 className={`inline-flex px-4 py-3 items-center text-lg font-medium cursor-pointer border-b-2 transition-all duration-300 relative z-20 ${
                   moreCategories.includes(activeTab)
-                    ? "text-[#9E77ED] border-b-2 border-[#9E77ED]" // active if open OR item selected
-                    : "border-transparent text-[#360C5F]" // inactive
+                    ? "text-[#9E77ED] border-b-2 border-[#9E77ED]"
+                    : "border-transparent text-[#360C5F]"
                 }`}
               >
                 More
@@ -121,7 +114,6 @@ export default function BlogFilterSections() {
                 />
               </button>
 
-              {/* Portal dropdown */}
               {moreOpen &&
                 dropdownPos &&
                 createPortal(
@@ -159,7 +151,7 @@ export default function BlogFilterSections() {
         </div>
       </div>
 
-      {/* Search Input */}
+      {/* 🔍 Search Input */}
       <div
         ref={searchRef}
         className={`flex items-center gap-2 transition-all duration-500 ease-in-out rounded-[8px] relative z-10 ${

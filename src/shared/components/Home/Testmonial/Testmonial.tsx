@@ -5,7 +5,6 @@ import SectionHeaderPortion from "../../SectionHeaderPortion";
 import { CommonPrimaryButton } from "../../CommonButton";
 import { img } from "@/shared/constant/imgExport";
 import { FaStar } from "react-icons/fa";
-import Image from "next/image";
 
 export default function Testmonial() {
   const testimonials = [

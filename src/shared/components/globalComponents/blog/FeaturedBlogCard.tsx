@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 export default function FeaturedBlogCard({ blog }: { blog: any }) {
   return (
     <Link
-      href={blog?.link}
+      href={"blog?.link"}
       key={blog.id}
       className="col-span-1 group cursor-pointer w-full flex flex-col"
     >

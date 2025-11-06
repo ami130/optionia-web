@@ -12,7 +12,7 @@ import {
 export default function BlogCardList({ blog }: { blog: any }) {
   return (
     <Link
-      href={blog?.link}
+      href={blog?.slug}
       key={blog.id}
       className="col-span-1 group cursor-pointer w-full flex flex-col"
     >
