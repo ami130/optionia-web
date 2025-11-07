@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import BlogCardList from "@/shared/components/globalComponents/blog/BlogCardList";
 import FeaturedBlogCard from "@/shared/components/globalComponents/blog/FeaturedBlogCard";
@@ -15,14 +14,14 @@ import {
 interface BlogListWithPaginationProps {
   featuredBlogs: any[];
   latestBlogs: any[];
-  firstPageCount?: number; // How many items on first page
-  itemsPerPage?: number; // How many items on other pages
+  firstPageCount?: number;
+  itemsPerPage?: number;
 }
 
 export default function BlogListWithPagination({
   featuredBlogs,
   latestBlogs,
-  firstPageCount = 6,
+  firstPageCount = 3,
   itemsPerPage = 6,
 }: BlogListWithPaginationProps) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -48,19 +47,22 @@ export default function BlogListWithPagination({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+
   return (
     <div className="space-y-12">
       {/* Featured Articles */}
-      <div>
-        <h2 className="text-[#2C076E] font-medium text-[32px] pb-6">
-          Featured Articles
-        </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full px-5 lg:px-0">
-          {featuredBlogs.map((blog) => (
-            <FeaturedBlogCard key={blog.id} blog={blog} />
-          ))}
+      {featuredBlogs?.length > 0 && (
+        <div>
+          <h2 className="text-[#2C076E] font-medium text-[32px] pb-6">
+            Featured Articles
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full px-5 lg:px-0">
+            {featuredBlogs.map((blog) => (
+              <FeaturedBlogCard key={blog.id} blog={blog} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Latest Articles */}
       <div>
@@ -73,7 +75,9 @@ export default function BlogListWithPagination({
             <BlogCardList key={blog.id} blog={blog} />
           ))}
         </div>
+      </div>
 
+      <div>
         {/* Pagination */}
         {totalPages > 1 && (
           <Pagination>

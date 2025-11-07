@@ -1,10 +1,14 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "optionia-backend.onrender.com", // Allows images from any HTTPS domain
-        // hostname: "**", // Allows images from any HTTPS domain
+        protocol: "https",
+        hostname: "optionia-backend.onrender.com",
+      },
+      {
+        protocol: "http", 
+        hostname: "optionia-backend.onrender.com",
       },
     ],
   },
