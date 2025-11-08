@@ -15,7 +15,6 @@ export default function BlogFilterSections({
 }) {
   const router = useRouter();
   
-  // Transform categories to include both name and slug
   const categories = categoriesData?.map((cat) => ({
     name: cat.name,
     slug: cat.slug || cat.name.toLowerCase().replace(/\s+/g, '-'),
@@ -42,7 +41,7 @@ export default function BlogFilterSections({
   const visibleCategories = allCategories.slice(0, 5);
   const moreCategories = allCategories.slice(5);
 
-  // 🧩 Debounced URL params update with router navigation
+  // 🧩 INSTANT URL update (no page reload)
   const updateURLParams = useCallback((search: string, categorySlug: string) => {
     const params = new URLSearchParams();
     
@@ -57,11 +56,11 @@ export default function BlogFilterSections({
     const queryString = params.toString();
     const newUrl = queryString ? `/blog?${queryString}` : '/blog';
     
-    // Use router.push to trigger a page reload with new params
-    router.push(newUrl);
-  }, [router]);
+    // Use replaceState for INSTANT URL update without reload
+    window.history.replaceState({}, '', newUrl);
+  }, []);
 
-  // 🧩 Debounce effect for search and category changes
+  // 🧩 Faster debounce (300ms instead of 500ms)
   useEffect(() => {
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
@@ -69,7 +68,7 @@ export default function BlogFilterSections({
 
     debounceRef.current = setTimeout(() => {
       updateURLParams(searchValue, activeTab);
-    }, 500); // 500ms debounce
+    }, 300); // Reduced to 300ms for faster response
 
     return () => {
       if (debounceRef.current) {
@@ -119,12 +118,6 @@ export default function BlogFilterSections({
   // 🧩 Clear search handler
   const handleClearSearch = () => {
     setSearchValue("");
-  };
-
-  // 🧩 Find active tab display name
-  const getActiveTabName = () => {
-    const activeCategory = allCategories.find(cat => cat.slug === activeTab);
-    return activeCategory ? activeCategory.name : "All";
   };
 
   return (
