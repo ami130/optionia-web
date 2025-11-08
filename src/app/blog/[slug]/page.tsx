@@ -1,8 +1,8 @@
-import { getSingleBlog } from "@/actions/get/blogPage.helper";
 import BlogContentClient from "./BlogContentClient";
 import { Metadata } from "next";
 import Script from "next/script";
 import { ENV_CONFIG } from "@/shared/constant/app.constant";
+import { getSingleBlog } from "@/actions/get/blogPage.helper";
 
 interface Props {
   params: { slug: string };
@@ -80,7 +80,7 @@ export default async function BlogPage({ params }: Props) {
     ? `${baseUrl}${blogPost.thumbnailUrl}`
     : `${baseUrl}/placeholder.png`;
 
-    console.log("first",imageUrl)
+  console.log("first", imageUrl);
 
   const canonicalUrl = meta?.canonicalUrl || `${baseUrl}/blog/${blogPost.slug}`;
 

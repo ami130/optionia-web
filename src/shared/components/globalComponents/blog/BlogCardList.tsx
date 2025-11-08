@@ -10,7 +10,13 @@ import {
 } from "@/components/ui/tooltip"; // make sure path is correct
 import { ENV_CONFIG } from "@/shared/constant/app.constant";
 
-export default function BlogCardList({ blog }: { blog: any }) {
+export default function BlogCardList({
+  blog,
+  index,
+}: {
+  blog: any;
+  index: number;
+}) {
   return (
     <Link
       href={`/blog/${blog?.slug}`}
@@ -26,6 +32,8 @@ export default function BlogCardList({ blog }: { blog: any }) {
           }
           alt={blog?.title}
           fill
+          priority={index < 3} // preloads above-the-fold
+          loading={index < 3 ? "eager" : "lazy"}
           className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 rounded-2xl"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
