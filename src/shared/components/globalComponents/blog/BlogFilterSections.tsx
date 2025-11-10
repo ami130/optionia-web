@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronDown, LucideSearch } from "lucide-react";
-import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 
 export default function BlogFilterSections({
@@ -14,53 +13,62 @@ export default function BlogFilterSections({
   initialCategory?: string;
 }) {
   const router = useRouter();
-  
-  const categories = categoriesData?.map((cat) => ({
-    name: cat.name,
-    slug: cat.slug || cat.name.toLowerCase().replace(/\s+/g, '-'),
-    id: cat.id
-  })) || [];
-  
-  const allCategories = [{ name: "All", slug: "all", id: null }, ...categories];
+
+  const categories =
+    categoriesData?.map((cat) => ({
+      name: cat.name,
+      slug: cat.slug || cat.name.toLowerCase().replace(/\s+/g, "-"),
+      id: cat.id,
+    })) || [];
+
+  const allCategories = [{ name: "All", slug: "", id: null }, ...categories];
 
   const [isFocused, setIsFocused] = useState(false);
   const [searchValue, setSearchValue] = useState(initialSearch);
-  const [activeTab, setActiveTab] = useState(initialCategory || "all");
+  const [activeTab, setActiveTab] = useState(initialCategory || "");
   const [moreOpen, setMoreOpen] = useState(false);
   const [showCategories, setShowCategories] = useState(true);
-  const [dropdownPos, setDropdownPos] = useState<{
-    top: number;
-    left: number;
-    width: number;
-  } | null>(null);
 
   const searchRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
-  const visibleCategories = allCategories.slice(0, 5);
-  const moreCategories = allCategories.slice(5);
+  const visibleCategories = allCategories.slice(0, 4);
+  const moreCategories = allCategories.slice(4);
 
   // 🧩 INSTANT URL update (no page reload)
-  const updateURLParams = useCallback((search: string, categorySlug: string) => {
-    const params = new URLSearchParams();
-    
-    if (search) {
-      params.set('search', search);
-    }
-    
-    if (categorySlug && categorySlug !== "all") {
-      params.set('category', categorySlug);
-    }
+  const updateURLParams = useCallback(
+    (search: string, categorySlug: string) => {
+      const params = new URLSearchParams();
 
-    const queryString = params.toString();
-    const newUrl = queryString ? `/blog?${queryString}` : '/blog';
-    
-    // Use replaceState for INSTANT URL update without reload
-    window.history.replaceState({}, '', newUrl);
-  }, []);
+      if (search) {
+        params.set("search", search);
+      }
 
-  // 🧩 Faster debounce (300ms instead of 500ms)
+      if (categorySlug && categorySlug !== "all") {
+        params.set("category", categorySlug);
+      }
+
+      const queryString = params.toString();
+      const newUrl = queryString ? `/blog?${queryString}` : "/blog";
+
+      // Use replaceState for INSTANT URL update without reload
+      window.history.replaceState({}, "", newUrl);
+    },
+    []
+  );
+
+  // 🧩 Handle category change - update both state and URL
+  const handleCategoryChange = useCallback(
+    (categorySlug: string) => {
+      setActiveTab(categorySlug);
+      // Immediately update URL when category changes
+      updateURLParams(searchValue, categorySlug);
+    },
+    [searchValue, updateURLParams]
+  );
+
+  // 🧩 Debounce for search only
   useEffect(() => {
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
@@ -68,7 +76,7 @@ export default function BlogFilterSections({
 
     debounceRef.current = setTimeout(() => {
       updateURLParams(searchValue, activeTab);
-    }, 300); // Reduced to 300ms for faster response
+    }, 300);
 
     return () => {
       if (debounceRef.current) {
@@ -104,20 +112,19 @@ export default function BlogFilterSections({
 
   // 🧩 Handle More dropdown positioning
   const handleMoreClick = () => {
-    if (moreRef.current) {
-      const rect = moreRef.current.getBoundingClientRect();
-      setDropdownPos({
-        top: rect.bottom + window.scrollY + 8,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-      });
-    }
     setMoreOpen((v) => !v);
   };
 
   // 🧩 Clear search handler
   const handleClearSearch = () => {
     setSearchValue("");
+  };
+
+  // 🧩 Handle More category click
+  const handleMoreCategoryClick = (catSlug: string) => {
+    setActiveTab(catSlug);
+    updateURLParams(searchValue, catSlug);
+    setMoreOpen(false);
   };
 
   return (
@@ -130,16 +137,16 @@ export default function BlogFilterSections({
             : "hidden opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="flex flex-wrap items-center gap-4 relative lg:border-b-2 border-gray-200 transition-all duration-500 ease-in-out">
-          {visibleCategories.map((cat, index) => (
+        <div className="flex flex-wrap items-center  gap-4 relative lg:border-b-2 border-gray-200 transition-all duration-500 ease-in-out">
+          {visibleCategories?.map((cat, index) => (
             <button
               key={cat.slug}
-              onClick={() => setActiveTab(cat.slug)}
+              onClick={() => handleCategoryChange(cat.slug)}
               className={`px-1 lg:px-3 py-2 text-lg font-medium cursor-pointer -mb-0.5 relative z-10 transition-all duration-500 ease-in-out delay-[${
                 index * 50
               }ms] ${
                 activeTab === cat.slug
-                  ? "text-[#9E77ED] border-b-2 border-[#9E77ED]"
+                  ? "text-[#9E77ED] border-b-2 -mb-2.5 border-[#9E77ED]"
                   : "text-[#360C5F] hover:text-purple-600"
               }`}
             >
@@ -148,12 +155,12 @@ export default function BlogFilterSections({
           ))}
 
           {/* More button */}
-          {moreCategories.length > 0 && (
+          {moreCategories?.length > 0 && (
             <div className="relative" ref={moreRef}>
               <button
                 onClick={handleMoreClick}
                 className={`inline-flex px-4 py-3 items-center text-lg font-medium cursor-pointer border-b-2 transition-all duration-300 relative z-20 ${
-                  moreCategories.some(cat => cat.slug === activeTab)
+                  moreCategories.some((cat) => cat.slug === activeTab)
                     ? "text-[#9E77ED] border-b-2 border-[#9E77ED]"
                     : "border-transparent text-[#360C5F]"
                 }`}
@@ -167,38 +174,24 @@ export default function BlogFilterSections({
                 />
               </button>
 
-              {moreOpen &&
-                dropdownPos &&
-                createPortal(
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: dropdownPos.top,
-                      left: dropdownPos.left,
-                      width: "400px",
-                      zIndex: 99999,
-                    }}
-                    className="bg-white border w-40 border-[#EDEAFD] rounded-[16px] shadow-[0_10px_40px_0_rgba(150,78,238,0.15)] p-4 flex flex-col gap-2"
-                  >
-                    {moreCategories.map((cat) => (
-                      <button
-                        key={cat.slug}
-                        onClick={() => {
-                          setActiveTab(cat.slug);
-                          setMoreOpen(false);
-                        }}
-                        className={`text-left px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors duration-300 ${
-                          activeTab === cat.slug
-                            ? "text-[#8838E0]"
-                            : "text-[#360C5F] hover:underline"
-                        }`}
-                      >
-                        {cat.name}
-                      </button>
-                    ))}
-                  </div>,
-                  document.body
-                )}
+              {/* Dropdown without portal */}
+              {moreOpen && (
+                <div className="absolute top-full left-0 mt-2 bg-white border border-[#EDEAFD] rounded-[16px] shadow-[0_10px_40px_0_rgba(150,78,238,0.15)] p-4 flex flex-col gap-2 w-48 z-50">
+                  {moreCategories?.map((cat) => (
+                    <button
+                      key={cat?.slug}
+                      onClick={() => handleMoreCategoryClick(cat.slug)}
+                      className={`text-left px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors duration-300 ${
+                        activeTab === cat?.slug
+                          ? "text-[#8838E0] bg-purple-50"
+                          : "text-[#360C5F] hover:bg-gray-50"
+                      }`}
+                    >
+                      {cat.name}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

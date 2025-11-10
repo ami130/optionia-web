@@ -10,15 +10,15 @@ export default function HeroSection() {
       id="home"
       className="bg-[linear-gradient(180deg,_#F6EEFF_0%,_rgba(249,249,255,0)_100%)]"
     >
-      <div className="max-w-6xl mx-auto py-20 lg:px-10 px-2">
-        <div className="lg:grid grid-cols-2 gap-4 items-center justify-center space-y-5 lg:space-y-0">
+      <div className="max-w-6xl mx-auto py-20 lg:px-8 px-2">
+        <div className="lg:grid grid-cols-2 gap-5 items-center justify-center space-y-5 lg:space-y-0">
           {/* First Section */}
           <div data-aos="fade-right" className="text-center lg:text-left">
             <div className="flex justify-center lg:justify-start">
               <SectionHeaderPortion text="Shopify product options app" />
             </div>
             <h1 className="text-5xl font-semibold text-secondaryTextColor leading-tight py-4">
-              Unlimited Product Options to your Shopify Stores
+              Unlimited Product Options to your <br /> Shopify Stores
             </h1>
             <p className="text-sm text-gray-500">
               Easily create as many product options and variants as you want all

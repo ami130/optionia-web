@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import BlogCardList from "@/shared/components/globalComponents/blog/BlogCardList";
 import FeaturedBlogCard from "@/shared/components/globalComponents/blog/FeaturedBlogCard";
 import {
@@ -23,11 +23,19 @@ export default function BlogListWithPagination({
   initialBlogs,
   initialSearch = "",
   initialCategory = "",
-  firstPageCount = 3,
+  firstPageCount = 6,
   itemsPerPage = 6,
 }: BlogListWithPaginationProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isFiltering, setIsFiltering] = useState(false);
+
+  // 🧩 Use refs to track changes and prevent unnecessary re-renders
+  const prevParams = useRef({
+    search: initialSearch,
+    category: initialCategory,
+  });
+  const prevInitialBlogs = useRef(initialBlogs);
+  const isInitialMount = useRef(true);
 
   // 🧩 Get current URL params for real-time updates
   const [currentParams, setCurrentParams] = useState({
@@ -35,22 +43,29 @@ export default function BlogListWithPagination({
     category: initialCategory,
   });
 
-  // 🧩 Listen to URL changes INSTANTLY
+  // 🧩 Listen to URL changes INSTANTLY but optimized
   useEffect(() => {
     const handleUrlChange = () => {
       const params = new URLSearchParams(window.location.search);
-      setCurrentParams({
-        search: params.get("search") || "",
-        category: params.get("category") || "",
-      });
-      setCurrentPage(1);
+      const newSearch = params.get("search") || "";
+      const newCategory = params.get("category") || "";
+
+      // Only update state if params actually changed
+      if (
+        newSearch !== currentParams.search ||
+        newCategory !== currentParams.category
+      ) {
+        setCurrentParams({
+          search: newSearch,
+          category: newCategory,
+        });
+        setCurrentPage(1);
+      }
     };
 
-    // Check URL on mount and when popstate occurs
     handleUrlChange();
 
-    // Listen for URL changes (from BlogFilterSections)
-    const interval = setInterval(handleUrlChange, 100);
+    const interval = setInterval(handleUrlChange, 300); // Reduced frequency
 
     window.addEventListener("popstate", handleUrlChange);
     return () => {
@@ -59,48 +74,93 @@ export default function BlogListWithPagination({
     };
   }, []);
 
-  // 🧩 INSTANT Client-side filtering (no API calls)
-  const { filteredBlogs, featuredBlogs, latestBlogs } = useMemo(() => {
-    setIsFiltering(true);
+  // 🧩 OPTIMIZED FILTERING: Only filter when necessary
+  const { filteredBlogs, featuredBlogs, latestBlogs, shouldShowResults } =
+    useMemo(() => {
+      const hasActiveSearch =
+        currentParams.search && currentParams.search.trim() !== "";
 
-    let filtered = initialBlogs;
+      // 🧩 FIXED: "all" means show ALL data, no category filtering
+      const hasActiveCategory =
+        currentParams.category &&
+        currentParams.category !== "all" &&
+        currentParams.category.trim() !== "";
 
-    // Apply search filter INSTANTLY
-    if (currentParams.search) {
-      const searchLower = currentParams.search.toLowerCase();
-      filtered = filtered.filter(
-        (blog) =>
-          blog.title?.toLowerCase().includes(searchLower) ||
-          blog.description?.toLowerCase().includes(searchLower) ||
-          blog.content?.toLowerCase().includes(searchLower)
-      );
-    }
+      const hasActiveFilters = hasActiveSearch || hasActiveCategory;
 
-    // Apply category filter INSTANTLY
-    if (currentParams.category && currentParams.category !== "all") {
-      filtered = filtered.filter(
-        (blog) =>
-          blog.category?.slug?.toLowerCase() ===
-            currentParams.category?.toLowerCase() ||
-          blog.category?.name?.toLowerCase() ===
-            currentParams.category?.toLowerCase()
-      );
-    }
+      // 🧩 Check if we need to filter at all
+      const paramsChanged =
+        currentParams.search !== prevParams.current.search ||
+        currentParams.category !== prevParams.current.category;
 
-    const featured = filtered.filter((blog) => blog.featured).slice(0, 2);
-    const latest = filtered.filter((blog) => !blog.featured);
+      const blogsChanged = initialBlogs !== prevInitialBlogs.current;
 
-    // Simulate very fast filtering completion
-    setTimeout(() => setIsFiltering(false), 50);
+      // If no active filters and no changes, return initial data (SHOW ALL)
+      if (!hasActiveFilters && !blogsChanged && !isInitialMount.current) {
+        const featured = initialBlogs
+          .filter((blog) => blog.featured)
+          .slice(0, 2);
+        const latest = initialBlogs.filter((blog) => !blog.featured);
 
-    return {
-      filteredBlogs: filtered,
-      featuredBlogs: featured,
-      latestBlogs: latest,
-    };
-  }, [initialBlogs, currentParams.search, currentParams.category]);
+        return {
+          filteredBlogs: initialBlogs, // Show all blogs
+          featuredBlogs: featured,
+          latestBlogs: latest,
+          shouldShowResults: true,
+        };
+      }
 
-  // 🧩 Pagination logic
+      // Only show filtering indicator when actually filtering
+      if (hasActiveFilters && paramsChanged) {
+        setIsFiltering(true);
+      }
+
+      let filtered = initialBlogs;
+
+      // Apply search filter only if active
+      if (hasActiveSearch) {
+        const searchLower = currentParams.search.toLowerCase();
+        filtered = filtered.filter(
+          (blog) =>
+            blog.title?.toLowerCase().includes(searchLower) ||
+            blog.description?.toLowerCase().includes(searchLower) ||
+            blog.content?.toLowerCase().includes(searchLower)
+        );
+      }
+
+      // 🧩 FIXED: Only apply category filter if it's NOT "all"
+      if (hasActiveCategory) {
+        filtered = filtered.filter(
+          (blog) =>
+            blog.category?.slug?.toLowerCase() ===
+              currentParams.category?.toLowerCase() ||
+            blog.category?.name?.toLowerCase() ===
+              currentParams.category?.toLowerCase()
+        );
+      }
+
+      const featured = filtered.filter((blog) => blog.featured).slice(0, 2);
+      const latest = filtered.filter((blog) => !blog.featured);
+
+      // Update refs
+      prevParams.current = { ...currentParams };
+      prevInitialBlogs.current = initialBlogs;
+      isInitialMount.current = false;
+
+      // Clear filtering indicator
+      if (hasActiveFilters) {
+        setTimeout(() => setIsFiltering(false), 50);
+      }
+
+      return {
+        filteredBlogs: filtered,
+        featuredBlogs: featured,
+        latestBlogs: latest,
+        shouldShowResults: filtered.length > 0 || !hasActiveFilters,
+      };
+    }, [initialBlogs, currentParams.search, currentParams.category]);
+
+  // 🧩 OPTIMIZED PAGINATION
   const paginatedBlogs = useMemo(() => {
     if (currentPage === 1) {
       return latestBlogs.slice(0, firstPageCount);
@@ -112,29 +172,59 @@ export default function BlogListWithPagination({
   }, [latestBlogs, currentPage, firstPageCount, itemsPerPage]);
 
   const totalBlogs = latestBlogs.length;
-  const remainingItems = totalBlogs - firstPageCount;
-  const totalPages = 1 + Math.ceil(Math.max(remainingItems, 0) / itemsPerPage);
+  const remainingItems = Math.max(totalBlogs - firstPageCount, 0);
+  const totalPages = Math.max(1, 1 + Math.ceil(remainingItems / itemsPerPage));
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, []);
 
-  // 🧩 Reset to page 1 when filters change
+  // 🧩 Reset to page 1 only when search/category actually changes
   useEffect(() => {
-    setCurrentPage(1);
+    if (
+      currentParams.search !== prevParams.current.search ||
+      currentParams.category !== prevParams.current.category
+    ) {
+      setCurrentPage(1);
+    }
   }, [currentParams.search, currentParams.category]);
+
+  // 🧩 Debug logging - only log when something actually changes
+  useEffect(() => {
+    const hasActiveSearch =
+      currentParams.search && currentParams.search.trim() !== "";
+    const hasActiveCategory =
+      currentParams.category &&
+      currentParams.category !== "all" &&
+      currentParams.category.trim() !== "";
+
+    console.log("🔄 Current state:", {
+      search: currentParams.search,
+      category: currentParams.category,
+      isAllCategory: currentParams.category === "all",
+      hasActiveSearch,
+      hasActiveCategory,
+      initialBlogs: initialBlogs.length,
+      filteredBlogs: filteredBlogs.length,
+    });
+  }, [
+    filteredBlogs.length,
+    currentParams.search,
+    currentParams.category,
+    initialBlogs.length,
+  ]);
 
   return (
     <div className="space-y-12">
-      {/* Loading indicator - Only shows briefly */}
+      {/* Loading indicator - Only shows when actually filtering */}
       {isFiltering && (
         <div className="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-pulse">
           🔄 Filtering...
         </div>
       )}
 
-      {/* Featured Articles */}
+      {/* Featured Articles - Only show if we have featured blogs */}
       {featuredBlogs.length > 0 && (
         <div>
           <h2 className="text-[#2C076E] font-medium text-[32px] pb-6">
@@ -159,7 +249,7 @@ export default function BlogListWithPagination({
           )}
         </h2>
 
-        {paginatedBlogs.length > 0 ? (
+        {shouldShowResults && paginatedBlogs.length > 0 ? (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-5 lg:px-0 mb-8">
               {paginatedBlogs.map((blog, index) => (
@@ -167,7 +257,7 @@ export default function BlogListWithPagination({
               ))}
             </div>
 
-            {/* Pagination */}
+            {/* Pagination - Only show if we have multiple pages */}
             {totalPages > 1 && (
               <Pagination>
                 <PaginationContent>
@@ -225,7 +315,10 @@ export default function BlogListWithPagination({
         ) : (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">
-              No Blogs found matching your criteria.
+              {currentParams.search ||
+              (currentParams.category && currentParams.category !== "all")
+                ? "No Blogs found matching your criteria."
+                : "No blogs available."}
             </p>
           </div>
         )}
@@ -233,6 +326,7 @@ export default function BlogListWithPagination({
     </div>
   );
 }
+
 // "use client";
 // import { useState, useEffect, useMemo } from "react";
 // import BlogCardList from "@/shared/components/globalComponents/blog/BlogCardList";

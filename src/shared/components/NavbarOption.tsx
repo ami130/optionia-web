@@ -11,6 +11,7 @@ export const NavbarOption = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [hasScrolled, setHasScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -58,13 +59,34 @@ export const NavbarOption = () => {
     },
   ];
 
-  // Fixed: Check if current path starts with resource link href
+  // Check if we're on homepage
+  const isHomePage = pathname === "/";
+
+  // Handle scroll effect
+  useEffect(() => {
+    if (!isHomePage) {
+      setHasScrolled(true);
+      return;
+    }
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setHasScrolled(scrollY > 10); // Small threshold to trigger immediately
+    };
+
+    // Set initial state
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHomePage]);
+
+  // Rest of your existing code remains the same...
   const isResourcesActive = resourceLinks.some(
     (res) => pathname === res.href || pathname.startsWith(res.href + "/")
   );
 
-  const isHomeSection = activeSection === "home" && pathname === "/";
-
+  // Your existing useEffect hooks for intersection observer and hash change...
   useEffect(() => {
     const sections = navLinks
       .filter((link) => link.id !== "resources")
@@ -101,7 +123,6 @@ export const NavbarOption = () => {
     const handleHashChange = (url: string) => {
       const hash = url.split("#")[1];
       if (hash) {
-        // Small timeout to ensure the page is loaded
         setTimeout(() => {
           const element = document.getElementById(hash);
           if (element) {
@@ -132,7 +153,7 @@ export const NavbarOption = () => {
     };
   }, [pathname]);
 
-  // Close dropdown when clicking outside
+  // Your existing click outside and route change effects...
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -149,28 +170,22 @@ export const NavbarOption = () => {
     };
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
     setIsResourcesOpen(false);
   }, [pathname]);
 
-  // Check if a section is active based on current scroll position
   const isSectionActive = (href: string, id?: string) => {
-    // --- Case 1: Hash-based homepage sections (/ #home etc.) ---
     if (href.startsWith("/#")) {
       const hash = href.split("#")[1];
       return pathname === "/" && activeSection === hash;
     }
 
-    // --- Case 2: Dynamic route pages (/blog, /service, etc.) ---
-    const basePath = href.split("/")[1]; // e.g. "blog" from "/blog"
-    const currentPath = pathname.split("/")[1]; // e.g. "blog" from "/blog/abc"
-
+    const basePath = href.split("/")[1];
+    const currentPath = pathname.split("/")[1];
     return basePath && basePath === currentPath;
   };
 
-  // Fixed: Check if resource link is active (including nested routes)
   const isResourceActive = (href: string) => {
     return pathname === href || pathname.startsWith(href + "/");
   };
@@ -180,12 +195,11 @@ export const NavbarOption = () => {
     const active = isActive || (isResource && isResourcesActive);
 
     return active
-      ? "relative overflow-hidden rounded-md px-2 py-2 font-medium text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-100 before:origin-left before:transition-transform before:duration-500 before:ease-out before:rounded-md before:-z-10"
-      : "relative overflow-hidden rounded-md px-2 py-2 font-medium text-gray-700 hover:text-secondaryTextColor before:absolute before:inset-0 before:bg-primaryColor before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:ease-out hover:before:scale-x-100 before:rounded-md before:-z-10";
+      ? "relative bg-[#f3ebff] overflow-hidden rounded-md px-3 py-2 font-medium text-secondaryTextColor before:absolute before:inset-0 before:bg-[#f3ebff] before:scale-x-100 before:origin-left before:transition-transform before:duration-500 before:ease-out before:rounded-md before:-z-10"
+      : "relative overflow-hidden rounded-md px-2 py-2 font-medium text-gray-700 hover:text-secondaryTextColor before:absolute before:inset-0 before:bg-[#f3ebff] before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:ease-out hover:before:scale-x-100 before:rounded-md before:-z-10";
   };
-  // Handle navigation for single page sections or full routes
+
   const handleNavClick = (href: string, id: string) => {
-    // --- For hash-based home sections ---
     if (href.startsWith("/#")) {
       if (pathname !== "/") {
         router.push(href);
@@ -200,25 +214,24 @@ export const NavbarOption = () => {
           window.history.pushState(null, "", `/#${id}`);
         }
       }
-    }
-    // --- For full routes like /blog ---
-    else {
+    } else {
       router.push(href);
     }
   };
 
   return (
     <nav
-      className={`sticky top-0 pt-2.5 z-50 transition-all duration-300 ${
-        isHomeSection ? "bg-[#F6EEFF]" : "bg-none"
+      className={`sticky top-0 pt-2.5 z-50 transition-all duration-500 ${
+        isHomePage && !hasScrolled ? "bg-[#F6EEFF]" : "bg-none"
       }`}
     >
+      {/* Rest of your JSX remains exactly the same */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* -------- Left: Logo -------- */}
+          {/* Your existing logo, nav links, and button code... */}
           <Link
             href="/"
-            className="flex items-center gap-2  bg-white px-3 py-2 rounded-md shadow-sm"
+            className="flex items-center gap-2 bg-white px-3 py-2 rounded-md shadow-sm"
           >
             <Image src={img.logo} alt="Logo" className="w-auto h-6" />
             <p className="text-gray-300">|</p>
@@ -227,7 +240,7 @@ export const NavbarOption = () => {
             </span>
           </Link>
 
-          {/* -------- Center: Nav Links (Desktop) -------- */}
+          {/* Center: Nav Links (Desktop) */}
           <div className="hidden md:flex items-center space-x-4 py-2 px-2 rounded-xl bg-white shadow-sm">
             {navLinks.map((link) => {
               if (link.name === "Resources") {
@@ -259,7 +272,6 @@ export const NavbarOption = () => {
                       </svg>
                     </button>
 
-                    {/* -------- Dropdown Menu with Animation -------- */}
                     <div
                       className={`absolute top-full mt-3 right-0 min-w-[560px] bg-white rounded-2xl shadow-lg p-4 z-50 grid grid-cols-2 gap-2 transition-all duration-300 transform ${
                         isResourcesOpen
@@ -276,13 +288,13 @@ export const NavbarOption = () => {
                             key={res.title}
                             href={res.href}
                             className={`
-                    flex items-start gap-4 p-2 rounded-md  group
-                    transform transition-all duration-500 ${
-                      isResourcesOpen
-                        ? "opacity-100 translate-x-0"
-                        : "opacity-0 translate-x-4"
-                    }
-                  `}
+                              flex items-start gap-4 p-2 rounded-md group
+                              transform transition-all duration-500 ${
+                                isResourcesOpen
+                                  ? "opacity-100 translate-x-0"
+                                  : "opacity-0 translate-x-4"
+                              }
+                            `}
                             style={{
                               transitionDelay: isResourcesOpen
                                 ? `${index * 100}ms`
@@ -290,21 +302,21 @@ export const NavbarOption = () => {
                             }}
                           >
                             <div
-                              className={`text-[#A15DEF] text-2xl flex-shrink-0 border-2 border-[#E7D7FD] rounded-[8px] p-[10px] transition-all duration-300 hover:duration-300  group-hover:bg-[#A15DEF] group-hover:text-white 
-                      ${isActive ? "bg-[#A15DEF] text-white " : ""}
-                    `}
+                              className={`text-[#A15DEF] text-2xl flex-shrink-0 border-2 border-[#E7D7FD] rounded-[8px] p-[10px] transition-all duration-300 hover:duration-300 group-hover:bg-[#A15DEF] group-hover:text-white 
+                                ${isActive ? "bg-[#A15DEF] text-white" : ""}
+                              `}
                             >
                               <Icon />
                             </div>
                             <div className="flex flex-col">
                               <span
                                 className={`text-[#360C5F] font-medium text-[16px] transition-all duration-300 group-hover:text-[#A15DEF]
-                         ${isActive ? "text-[#A15DEF] " : ""}
-                      `} 
+                                  ${isActive ? "text-[#A15DEF]" : ""}
+                                `}
                               >
                                 {res.title}
                               </span>
-                              <span className="text-gray-500 text-[12px] font-normal transition-all duration-300 ">
+                              <span className="text-gray-500 text-[12px] font-normal transition-all duration-300">
                                 {res.subtitle}
                               </span>
                             </div>
@@ -330,7 +342,7 @@ export const NavbarOption = () => {
             })}
           </div>
 
-          {/* -------- Right: Button (Desktop) -------- */}
+          {/* Right: Button (Desktop) */}
           <div className="hidden md:flex">
             <CommonPrimaryButton
               text="Try for Free"
@@ -338,7 +350,7 @@ export const NavbarOption = () => {
             />
           </div>
 
-          {/* -------- Mobile Menu Toggle -------- */}
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-purple-700 hover:bg-gray-100 focus:outline-none transition-all"
@@ -376,7 +388,7 @@ export const NavbarOption = () => {
         </div>
       </div>
 
-      {/* -------- Mobile Menu -------- */}
+      {/* Mobile Menu */}
       <div
         className={`md:hidden transition-all duration-500 overflow-hidden ${
           isOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"

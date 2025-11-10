@@ -64,6 +64,8 @@ export default async function BlogPage({ params }: Props) {
   const blogData = await getSingleBlog(params.slug);
   const blogPost = blogData?.data;
 
+  console.log("blogPost");
+
   if (!blogPost) {
     return <div className="text-center py-20">Blog not found.</div>;
   }
