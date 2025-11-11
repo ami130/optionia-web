@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Script from "next/script";
 import { ENV_CONFIG } from "@/shared/constant/app.constant";
 import { getSingleBlog } from "@/actions/get/blogPage.helper";
+import { img } from "@/shared/constant/imgExport";
 
 interface Props {
   params: { slug: string };
@@ -10,7 +11,9 @@ interface Props {
 
 // ✅ Generate Metadata for SEO dynamically (SSR)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const blogData = await getSingleBlog(params.slug);
+  console.log("params", params?.slug);
+
+  const blogData = await getSingleBlog(params?.slug);
   const blogPost = blogData?.data;
 
   if (!blogPost) {
@@ -61,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // ✅ Main Page Component (Server-rendered)
 export default async function BlogPage({ params }: Props) {
-  const blogData = await getSingleBlog(params.slug);
+  const blogData = await getSingleBlog(params?.slug);
   const blogPost = blogData?.data;
 
   console.log("blogPost");
@@ -80,9 +83,7 @@ export default async function BlogPage({ params }: Props) {
 
   const imageUrl = blogPost?.thumbnailUrl
     ? `${baseUrl}${blogPost.thumbnailUrl}`
-    : `${baseUrl}/placeholder.png`;
-
-  console.log("first", imageUrl);
+    : img.blog1;
 
   const canonicalUrl = meta?.canonicalUrl || `${baseUrl}/blog/${blogPost.slug}`;
 
@@ -124,12 +125,14 @@ export default async function BlogPage({ params }: Props) {
       />
 
       {/* ✅ Blog Content Client Component */}
-      <BlogContentClient
-        blogPost={{
-          ...blogPost,
-          date: formattedDate,
-        }}
-      />
+      <div>
+        <BlogContentClient
+          blogPost={{
+            ...blogPost,
+            date: formattedDate,
+          }}
+        />
+      </div>
     </div>
   );
 }

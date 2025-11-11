@@ -14,7 +14,7 @@ export default function BlogContentClient({ blogPost }: { blogPost: any }) {
       />
 
       <motion.div
-        className="max-w-4xl mx-auto py-24 px-4 lg:px-0 space-y-6"
+        className="max-w-6xl mx-auto py-24 px-4  lg:px-8 space-y-6"
         initial={{ opacity: 0, x: -60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{

@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function OptioniaSection2() {
   const hoverCardClass =
-    "group relative bg-white rounded-2xl p-6 sm:p-10 md:py-11 md:px-14 shadow-md transition-all duration-500 hover:shadow-[0_10px_40px_rgba(139,92,246,0.25)] hover:-translate-y-2 hover:bg-gradient-to-br hover:from-white hover:to-purple-50";
+    "group relative bg-white rounded-2xl p-6 sm:p-10 md:py-11 md:px-14 transition-all duration-500 hover:shadow-[0_10px_40px_rgba(139,92,246,0.25)] hover:-translate-y-2 hover:bg-gradient-to-br hover:from-white hover:to-purple-50";
 
   const glowOverlayClass =
     "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-purple-100/40 via-transparent to-transparent rounded-2xl blur-[1px]";
@@ -17,7 +17,6 @@ export default function OptioniaSection2() {
   return (
     <section className="bg-secondPrimaryColor py-20">
       <div className="max-w-6xl mx-auto  space-y-6 lg:px-8 px-2">
-        
         {/* ----------- Row 1 ----------- */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">
           {/* Left text section */}
@@ -34,7 +33,6 @@ export default function OptioniaSection2() {
               </h1>
             </div>
             <div className="mt-4 flex items-center gap-3 hover:underline transition-all">
-              {" "}
               <Link href={"/"}>See all options</Link>{" "}
               <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />{" "}
             </div>{" "}

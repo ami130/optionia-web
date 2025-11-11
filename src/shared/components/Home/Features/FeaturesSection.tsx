@@ -59,10 +59,10 @@ export default function FeaturesStack() {
       ref={containerRef}
       className="relative w-full "
       // Height scales smoothly with number of features
-      style={{ height: `${3 * 50}vh` }}
+      style={{ height: `${4 * 50}vh` }}
     >
       {/* Sticky viewport area — adaptive height for all devices */}
-      <div className="sticky top-0 h-[70vh] sm:h-[90vh] md:h-[80vh] lg:h-[85vh] xl:h-[100vh]  flex items-center justify-center overflow-hidden">
+      <div className="sticky  top-10 h-[70vh] sm:h-[90vh] md:h-[80vh] lg:h-[85vh] xl:h-[80vh]  flex items-center justify-center overflow-hidden">
         {features.map((item, index) => {
           const start = index / features.length;
           const end = (index + 1) / features.length;

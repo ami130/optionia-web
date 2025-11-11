@@ -36,7 +36,7 @@ export default function BlogFilterSections({
   const visibleCategories = allCategories.slice(0, 4);
   const moreCategories = allCategories.slice(4);
 
-  // 🧩 INSTANT URL update (no page reload)
+  // 🧩 FIXED: INSTANT URL update - properly handle "All" case
   const updateURLParams = useCallback(
     (search: string, categorySlug: string) => {
       const params = new URLSearchParams();
@@ -45,7 +45,8 @@ export default function BlogFilterSections({
         params.set("search", search);
       }
 
-      if (categorySlug && categorySlug !== "all") {
+      // 🧩 FIXED: Only set category if it's NOT empty (not "All")
+      if (categorySlug) {
         params.set("category", categorySlug);
       }
 
@@ -137,7 +138,7 @@ export default function BlogFilterSections({
             : "hidden opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="flex flex-wrap items-center  gap-4 relative lg:border-b-2 border-gray-200 transition-all duration-500 ease-in-out">
+        <div className="flex flex-wrap items-center gap-4 relative lg:border-b-2 border-gray-200 transition-all duration-500 ease-in-out">
           {visibleCategories?.map((cat, index) => (
             <button
               key={cat.slug}
