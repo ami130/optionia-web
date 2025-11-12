@@ -10,7 +10,7 @@ export default function HeroSection() {
       id="home"
       className="bg-[linear-gradient(180deg,_#F6EEFF_0%,_rgba(249,249,255,0)_100%)]"
     >
-      <div className="max-w-6xl mx-auto py-20 lg:px-8 px-2">
+      <div className="max-w-7xl mx-auto py-20 lg:px-0 px-2">
         <div className="lg:grid grid-cols-2 gap-5 items-center justify-center space-y-5 lg:space-y-0">
           {/* First Section */}
           <div data-aos="fade-right" className="text-center lg:text-left">

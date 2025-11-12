@@ -89,8 +89,7 @@ export default async function BlogPage({ params }: Props) {
 
   return (
     <div>
-      {/* ✅ Structured Data for Google SEO (JSON-LD) */}
-      <Script
+       <Script
         id="blog-schema"
         type="application/ld+json"
         strategy="afterInteractive"
