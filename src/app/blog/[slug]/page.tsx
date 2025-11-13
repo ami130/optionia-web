@@ -89,7 +89,7 @@ export default async function BlogPage({ params }: Props) {
 
   return (
     <div>
-       <Script
+      <Script
         id="blog-schema"
         type="application/ld+json"
         strategy="afterInteractive"
@@ -126,7 +126,7 @@ export default async function BlogPage({ params }: Props) {
       {/* ✅ Blog Content Client Component */}
       <div>
         <BlogContentClient
-          blogPost={{
+          blogData={{
             ...blogPost,
             date: formattedDate,
           }}

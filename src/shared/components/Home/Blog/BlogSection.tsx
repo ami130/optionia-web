@@ -4,7 +4,7 @@ import BlogList from "./BlogList";
 
 export default function BlogSection() {
   return (
-    <div className="max-w-6xl mx-auto py-20 lg:px-10 px-2 space-y-12">
+    <div className="max-w-7xl mx-auto py-20 lg:px-0 px-4 space-y-12">
       <SectionHeader
         text="Pricing Plan"
         title="Blog & Articles"

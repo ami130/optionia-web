@@ -7,7 +7,7 @@ export default function HowItWorksSection() {
   return (
     <div
       id="how-it-works"
-      className="max-w-6xl mx-auto py-20 lg:px-8 px-2 space-y-12"
+      className="max-w-7xl mx-auto py-20 lg:px-0 px-4 space-y-12"
     >
       <SectionHeader
         text="How it works"

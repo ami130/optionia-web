@@ -59,7 +59,7 @@ export default function WorksSubSection({ data }: { data: any }) {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="text-sm font-light text-gray-400 mt-2 leading-relaxed"
+                    className="text-[16px] font-normal text-gray-500 mt-2 leading-relaxed"
                   >
                     {step.subtitle}
                   </motion.p>

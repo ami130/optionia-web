@@ -226,7 +226,7 @@ export const NavbarOption = () => {
       }`}
     >
       {/* Rest of your JSX remains exactly the same */}
-      <div className="max-w-7xl mx-auto  border">
+      <div className="max-w-7xl mx-auto lg:px-0 px-4">
         <div className="flex justify-between items-center h-16">
           {/* Your existing logo, nav links, and button code... */}
           <Link

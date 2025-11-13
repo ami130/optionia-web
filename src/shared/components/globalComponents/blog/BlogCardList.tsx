@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"; // make sure path is correct
 import { ENV_CONFIG } from "@/shared/constant/app.constant";
+import { img } from "@/shared/constant/imgExport";
 
 export default function BlogCardList({
   blog,
@@ -28,7 +29,7 @@ export default function BlogCardList({
           src={
             blog.thumbnailUrl
               ? `${ENV_CONFIG.baseApi}${blog.thumbnailUrl}`
-              : "/placeholder.png"
+              : img.blog1
           }
           alt={blog?.title}
           fill

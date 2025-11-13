@@ -73,21 +73,17 @@ export default function FaqSection({
             subtitle="Everything you need to know about Optionia. Can't find what you're looking for?"
           />
         </div>
-        <Accordion
-          type="single"
-          collapsible
-          className="space-y-3"
-        >
+        <Accordion type="single" collapsible className="space-y-3">
           {items.map((item) => (
             <AccordionItem
               key={item.id}
               value={item.id}
-              className="border bg-white text-secondaryTextColor px-6 py-2 rounded-2xl"
+              className="border bg-white px-6 py-2 rounded-2xl"
             >
-              <AccordionTrigger className="font-semibold hover:no-underline text-left cursor-pointer">
+              <AccordionTrigger className="font-medium text-xl text-[#360C5F] hover:no-underline text-left cursor-pointer">
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
+              <AccordionContent className="text-muted-foreground text-[18px] font-normal">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

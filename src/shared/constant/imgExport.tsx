@@ -8,7 +8,7 @@ import shopifyIcon from "../../../assets/shopify.svg";
 import rightArrowIcon from "../../../assets/arrow-up-right.svg";
 import rightArrowWhiteIcon from "../../../assets/arrowRightWhite.svg";
 import logo from "../../../assets/logo.svg";
-import optionia1 from "../../../assets/optionia1.png";
+import optionia1 from "../../../assets/optionia1.jpg";
 import optionia2 from "../../../assets/optionia2.png";
 import optionia3 from "../../../assets/optionia3.png";
 import optionia4 from "../../../assets/optionia4.png";

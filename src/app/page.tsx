@@ -20,14 +20,15 @@ export default function Home() {
         <OptioniaSection2 />
       </div>
       <FeaturesSection />
-      <FaqSection />
       <HowItWorksSection />
       <ChooseOptioniaSection />
-      <SupportSection />
       <PricingSection />
+      <Testmonial />
+      <SupportSection />
+
+      <FaqSection />
       <BlogSection />
       <BannerSection />
-      <Testmonial />
     </div>
   );
 }

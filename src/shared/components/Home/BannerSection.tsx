@@ -4,7 +4,7 @@ import { CommonPrimaryButton, CommonSecondaryButton } from "../CommonButton";
 
 export default function BannerSection() {
   return (
-    <div className="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4  lg:px-0">
       <div className="relative   rounded-2xl overflow-hidden my-16">
         {/* Background Image */}
         <Image

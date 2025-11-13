@@ -52,7 +52,7 @@ export default function Testmonial() {
 
   return (
     <section className="w-full bg-white">
-      <div className="max-w-6xl mx-auto py-16 sm:py-20 md:py-24 px-4  lg:px-8  ">
+      <div className="max-w-7xl mx-auto py-16 sm:py-20 md:py-24 px-4  lg:px-0 px-4  ">
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-10 items-center">
           {/* === LEFT FIXED SECTION === */}
           <div className="lg:col-span-2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">

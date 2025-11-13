@@ -6,12 +6,12 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 
 export default function SupportSubSection({ data }: { data: any[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
       {data.map((item, index) => (
         <div
           key={item.id}
           className={`p-6 pe-0 space-y-5 transition-all duration-300 ease-in-out
-              ${index === 0 ? "" : "lg:border-l-2 border-l-0"} 
+              ${index === 0 ? "lg:ps-0 ps-6" : "lg:border-l-2 border-l-0"} 
               border-primaryColor`}
         >
           {/* Icon Section */}

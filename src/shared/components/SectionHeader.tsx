@@ -13,13 +13,13 @@ export default function SectionHeader({
   return (
     <div
       data-aos="zoom-in"
-      className="max-w-2xl mx-auto flex flex-col items-center text-center space-y-4"
+      className="max-w-4xl mx-auto flex flex-col items-center text-center"
     >
       <SectionHeaderPortion text={text} />
-      <h2 className="text-3xl text-secondaryTextColor font-semibold">
+      <h2 className="text-[48px] text-secondaryTextColor font-medium pt-3 pb-4 ">
         {title}
       </h2>
-      <p className="text-sm ">{subtitle}</p>
+      <p className="text-[18px] font-normal text-gray-800">{subtitle}</p>
     </div>
   );
 }

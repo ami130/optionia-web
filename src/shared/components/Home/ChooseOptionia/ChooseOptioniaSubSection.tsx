@@ -50,10 +50,12 @@ export default function ChooseOptioniaSubSection({
 
           {/* Text Section */}
           <div className="space-y-3">
-            <h1 className="text-secondaryTextColor font-semibold text-lg transition-colors duration-300">
+            <h1 className="text-[#201F23] font-medium text-xl transition-colors duration-300">
               {item.title}
             </h1>
-            <p className="text-sm font-light text-gray-900">{item.subtitle}</p>
+            <p className="text-[16px] font-normal text-gray-900">
+              {item.subtitle}
+            </p>
           </div>
         </div>
       ))}
