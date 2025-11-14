@@ -33,6 +33,10 @@ import blog3 from "../../../assets/blog3.png";
 import blog5 from "../../../assets/blog5.png";
 import blog6 from "../../../assets/blog6.png";
 import star from "../../../assets/star.png";
+import fb from "../../../assets/fb.svg";
+import x from "../../../assets/x.svg";
+import shareLink from "../../../assets/link.svg";
+import linkedin from "../../../assets/linkdin.svg";
 
 export const img = {
   aboutImg2,
@@ -70,4 +74,8 @@ export const img = {
   star,
   blog5,
   blog6,
+  fb,
+  x,
+  shareLink,
+  linkedin,
 };

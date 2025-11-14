@@ -6,7 +6,7 @@ import { footerHeaderData } from "../constant/data";
 
 export default function FooterHeader() {
   return (
-    <div className="max-w-6xl mx-auto lg:px-10 px-2">
+    <div className="max-w-7xl mx-auto lg:px-0 px-4">
       <div className="overflow-hidden py-12 relative">
         {/* Left fade - more dramatic */}
         <div className="absolute left-0 top-0 bottom-0 w-80 bg-gradient-to-r from-white via-white/50 to-transparent z-10" />

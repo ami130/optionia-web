@@ -24,7 +24,7 @@ export default function Footer() {
     }
   };
   return (
-    <footer className="max-w-6xl mx-auto lg:px-10 px-4">
+    <footer className="max-w-7xl mx-auto lg:px-0 px-4">
       <div className="border-t py-12 ">
         <div className=" grid grid-cols-1 lg:grid-cols-9 gap-10 ">
           {/* Logo + Subscribe */}

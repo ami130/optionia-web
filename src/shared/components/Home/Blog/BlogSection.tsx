@@ -1,8 +1,10 @@
-import { blogData } from "@/shared/constant/data";
 import SectionHeader from "../../SectionHeader";
 import BlogList from "./BlogList";
+import { fetchBlogPageData } from "@/actions/get/blogPage.helper";
 
-export default function BlogSection() {
+export default async function BlogSection() {
+  const { blogs: blogData } = await fetchBlogPageData();
+
   return (
     <div className="max-w-7xl mx-auto py-20 lg:px-0 px-4 space-y-12">
       <SectionHeader

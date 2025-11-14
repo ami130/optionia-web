@@ -25,6 +25,7 @@ export function CommonPrimaryButton({
         hover:bg-[position:right_center]
         hover:scale-[1.03]
         active:scale-[0.98]
+        w-full
         ${className}
       `}
     >
