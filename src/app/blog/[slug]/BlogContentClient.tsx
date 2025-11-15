@@ -176,22 +176,22 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
               <p className="text-[18px] font-semibold mb-6">
                 Table of Contents
               </p>
-              <div className="space-y-4 relative  border-l-2 border-gray-200">
+              <div className="space-y-4 relative  border-l-1 border-gray-200">
                 {toc.map((item) => (
                   <p
                     key={item.id}
                     id={`toc-${item.id}`}
-                    className={`cursor-pointer ps-5 font-medium text-[16px] py-1 transition-colors relative
+                    className={`cursor-pointer ps-5  text-[16px] py-1 transition-colors relative
         ${
           activeId === item.id
-            ? "text-[#854BFF]"
+            ? "text-[#854BFF] font-medium"
             : "text-[#384250] hover:text-[#854BFF]"
         }`}
                     onClick={() => handleTOCClick(item.id)}
                   >
                     {/* Active border highlight */}
                     {activeId === item.id && (
-                      <span className="absolute left-0 top-0 h-full w-0.5 bg-[#854BFF]" />
+                      <span className="absolute -left-0 top-0 h-full w-0.5 bg-[#854BFF]" />
                     )}
 
                     {item.title}

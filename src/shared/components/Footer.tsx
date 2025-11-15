@@ -194,9 +194,13 @@ export default function Footer() {
           <span className="text-[#360C5F] font-medium"> ParseLab</span>
         </div>
         <div className="flex items-center gap-4 text-[#360C5F]">
-          <p className="hover:underline cursor-pointer">Terms of service</p>
+          <Link href={"/terms-of-services"}>
+            <p className="hover:underline cursor-pointer">Terms of service</p>
+          </Link>
           <p>•</p>
-          <p className="hover:underline cursor-pointer">Privacy policy</p>
+          <Link href={"/privacy-policy"}>
+            <p className="hover:underline cursor-pointer">Privacy policy</p>
+          </Link>
         </div>
       </div>
     </footer>

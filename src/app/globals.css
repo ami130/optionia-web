@@ -11,11 +11,10 @@
   --color-secondPrimaryColor: #ece7ff;
   --color-secondaryColor: #f4f2ff;
   --color-secondaryTextColor: #2c076e;
-  --color-secondaryBaseColor: #FAF6FE;
-
+  --color-secondaryBaseColor: #faf6fe;
 
   /* Add your global gradient here */
-  --gradient-active-step: linear-gradient(to bottom, #6C47FF, #9C6BFF, #C084FC);
+  --gradient-active-step: linear-gradient(to bottom, #6c47ff, #9c6bff, #c084fc);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -134,4 +133,18 @@
   }
 }
 
+/* When accordion is open */
+[data-state="open"] .accordion-trigger-icon span {
+  content: "-";
+  transform: rotate(180deg);
+}
 
+/* Default closed */
+[data-state="closed"] .accordion-trigger-icon span {
+  content: "+";
+}
+
+/* Hides ShadCN default accordion arrow */
+.accordion-trigger svg {
+  display: none !important;
+}

@@ -37,6 +37,7 @@ import fb from "../../../assets/fb.svg";
 import x from "../../../assets/x.svg";
 import shareLink from "../../../assets/link.svg";
 import linkedin from "../../../assets/linkdin.svg";
+import inja from "../../../assets/inja.png";
 
 export const img = {
   aboutImg2,
@@ -78,4 +79,5 @@ export const img = {
   x,
   shareLink,
   linkedin,
+  inja,
 };
