@@ -159,7 +159,7 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
             </div>
             {/* Blog Content */}
             <motion.div
-              className="prose prose-lg max-w-full px-4 pt-24 "
+              className="prose prose-lg max-w-full px-4 pt-24 blog-content"
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
