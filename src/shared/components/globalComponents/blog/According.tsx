@@ -1,17 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export interface AccordionItemType {
-  id: string;
-  question: string;
-  answer: string;
-}
-
-export default function CustomAccordion({
-  items,
-}: {
-  items: AccordionItemType[];
-}) {
+export default function CustomAccordion({ data }: { data: any }) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   const toggle = (id: string) => {
@@ -19,15 +9,16 @@ export default function CustomAccordion({
   };
 
   return (
-    <div className="space-y-3">
-      {items.map((item) => {
+    <div className="space-y-3 py-12">
+      <p className="text-[#360C5F] font-medium text-[32px]">
+        {data?.faqTitle || "FAQ"}
+      </p>
+
+      {(data?.items || [])?.map((item: any) => {
         const isOpen = openId === item.id;
 
         return (
-          <div
-            key={item.id}
-            className="border bg-white px-6 py-4 rounded-2xl"
-          >
+          <div key={item.id} className="border border-[#E7D7FD] bg-white px-6 py-4 rounded-2xl">
             {/* Trigger */}
             <button
               onClick={() => toggle(item.id)}
@@ -37,15 +28,11 @@ export default function CustomAccordion({
 
               {/* + / - icon */}
               <span
-                className={`
-    w-7 h-7 flex items-center justify-center 
-   text-lg font-bold transition-all duration-200 rounded-full
-    ${
-      isOpen
-        ? "text-white border-0  "
-        : "bg-[#F9FAFB] text-[#360C5F] border"
-    }
-  `}
+                className={`w-11 h-11 flex items-center justify-center text-lg font-bold transition-all duration-200 rounded-full ${
+                  isOpen
+                    ? "text-white border-0"
+                    : "border-[#F2E9FE] text-[#360C5F] border"
+                }`}
                 style={
                   isOpen
                     ? {
@@ -62,12 +49,13 @@ export default function CustomAccordion({
             {/* Content */}
             <div
               className={`overflow-hidden transition-all duration-300 ${
-                isOpen ? "max-h-40 mt-3" : "max-h-0"
+                isOpen ? "max-h-96 mt-3" : "max-h-0"
               }`}
             >
-              <p className="text-muted-foreground text-[18px] font-normal">
-                {item.answer}
-              </p>
+              <div
+                className="text-muted-foreground text-[18px] font-normal"
+                dangerouslySetInnerHTML={{ __html: item.answer || "" }}
+              />
             </div>
           </div>
         );

@@ -5,11 +5,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "optionia-backend.onrender.com",
+        hostname: "optionia-app.onrender.com",
       },
       {
         protocol: "http",
-        hostname: "optionia-backend.onrender.com",
+        hostname: "optionia-app.onrender.com",
       },
     ],
     formats: ["image/webp", "image/avif"],

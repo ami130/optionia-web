@@ -14,6 +14,7 @@ import { useEffect, useState, useRef } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import SingleBlogFaqSection from "./SingleBlogFaqSection";
 import BlogAuthorSection from "./BlogAuthorSection";
+import CustomAccordion from "@/shared/components/globalComponents/blog/According";
 
 const features = [
   "24/7 support",
@@ -28,8 +29,17 @@ interface TOCItem {
 }
 
 export default function BlogContentClient({ blogData }: { blogData: any }) {
-  const { title, authors, createdAt, thumbnailUrl, readingTime, relatedBlogs } =
-    blogData || {};
+  const {
+    title,
+    authors,
+    createdAt,
+    thumbnailUrl,
+    readingTime,
+    relatedBlogs,
+    keyTakeaways,
+    promotionalData,
+    faqData,
+  } = blogData || {};
 
   console.log("blogData", blogData);
 
@@ -154,8 +164,7 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
             </div>
             {/* Key Takeaways */}
             <div className="border border-[#BB8AF6] rounded-2xl bg-[#FAF6FE] p-5 mt-10">
-              <p>Key Takeaways</p>
-              <p>hello key takways</p>
+              <div dangerouslySetInnerHTML={{ __html: keyTakeaways || "" }} />
             </div>
             {/* Blog Content */}
             <motion.div
@@ -165,7 +174,7 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
               transition={{ delay: 0.4, duration: 0.6 }}
               ref={contentRef}
             />
-            <SingleBlogFaqSection />
+            <CustomAccordion data={faqData} />
             <hr className="mb-12 border-[#BB8AF6]" />
             <BlogAuthorSection authors={authors} />
           </motion.div>
@@ -231,25 +240,39 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
               </div>
             </div>
             <div className="bg-[#FAF6FE] rounded-2xl p-4 space-y-6">
-              <Image src={img.aboutImg2} alt="image2" className="rounded-xl" />
+              <Image
+                src={
+                  promotionalData?.image
+                    ? `${ENV_CONFIG.baseApi}${promotionalData.image}`
+                    : img.aboutImg2
+                }
+                alt={promotionalData?.title}
+                width={200}
+                height={200}
+                className="rounded-xl"
+              />
               <div className="space-y-3">
                 <p className="text-[#2C076E] text-[24px] font-medium">
-                  Level Up Your Product Options with Optionia
+                  {promotionalData?.title}{" "}
                 </p>
                 <div className="space-y-2">
-                  {features.map((item, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <AiOutlineCheck className="text-[#A15DEF]" />
-                      <p className="text-[16px] font-normal">{item}</p>
-                    </div>
-                  ))}
+                  {promotionalData?.keywords?.map(
+                    (item: string, index: number) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <AiOutlineCheck className="text-[#A15DEF]" />
+                        <p className="text-[16px] font-normal">{item}</p>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
               <div className="">
-                <CommonPrimaryButton
-                  text="Get started for Free"
-                  img={img.rightArrowWhiteIcon}
-                />
+                <Link href={promotionalData?.promotional_url || "/"}>
+                  <CommonPrimaryButton
+                    text="Get started for Free"
+                    img={img.rightArrowWhiteIcon}
+                  />
+                </Link>
               </div>
             </div>
           </div>

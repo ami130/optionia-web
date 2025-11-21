@@ -3,7 +3,6 @@ import FaqSection from "@/shared/components/Home/FaqSection";
 import PricingPlanSubSection from "@/shared/components/Home/Pricing/PricingPlanSubSection";
 import PageHeader from "@/shared/components/PageHeader";
 import { img } from "@/shared/constant/imgExport";
-import React from "react";
 
 export default function PricingPage() {
   return (

@@ -1,4 +1,3 @@
-import { Mail, Phone, MapPin } from "lucide-react";
 import PageHeader from "@/shared/components/PageHeader";
 import FaqSection from "@/shared/components/Home/FaqSection";
 import BannerSection from "@/shared/components/Home/BannerSection";
