@@ -30,7 +30,7 @@ export default function BlogListWithPagination({
   const [isFiltering, setIsFiltering] = useState(false);
 
   console.log("currentPage", currentPage);
-
+  
   // 🧩 Use refs to track changes and prevent unnecessary re-renders
   const prevParams = useRef({
     search: initialSearch,
@@ -38,6 +38,7 @@ export default function BlogListWithPagination({
   });
   const prevInitialBlogs = useRef(initialBlogs);
   const isInitialMount = useRef(true);
+  console.log("prevInitialBlogs", prevInitialBlogs);
 
   // 🧩 Get current URL params for real-time updates
   const [currentParams, setCurrentParams] = useState({
@@ -157,29 +158,24 @@ export default function BlogListWithPagination({
       };
     }, [initialBlogs, currentParams.search, currentParams.category]);
 
+  console.log("latestBlogs", latestBlogs);
+
+  // Paginated blogs
   // Paginated blogs
   const paginatedBlogs = useMemo(() => {
     if (!latestBlogs || latestBlogs.length === 0) return [];
 
-    if (currentPage === 1) {
-      return latestBlogs.slice(0, firstPageCount);
-    }
-
-    const startIndex = firstPageCount + (currentPage - 2) * itemsPerPage;
+    const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
     return latestBlogs.slice(startIndex, endIndex);
-  }, [latestBlogs, currentPage, firstPageCount, itemsPerPage]);
+  }, [latestBlogs, currentPage, itemsPerPage]);
 
   // Total pages
   const totalPages = useMemo(() => {
     if (!latestBlogs || latestBlogs.length === 0) return 1;
-
-    if (latestBlogs.length <= firstPageCount) return 1;
-
-    const remainingItems = latestBlogs.length - firstPageCount;
-    return 1 + Math.ceil(remainingItems / itemsPerPage);
-  }, [latestBlogs, firstPageCount, itemsPerPage]);
+    return Math.ceil(latestBlogs.length / itemsPerPage);
+  }, [latestBlogs, itemsPerPage]);
 
   // Handle page change
   const handlePageChange = (page: number) => {
@@ -196,6 +192,8 @@ export default function BlogListWithPagination({
       setCurrentPage(1);
     }
   }, [currentParams.search, currentParams.category]);
+
+  console.log("paginatedBlogs", paginatedBlogs);
 
   return (
     <div className="space-y-12">
@@ -234,7 +232,7 @@ export default function BlogListWithPagination({
         {shouldShowResults && paginatedBlogs.length > 0 ? (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-5 lg:px-0 mb-8">
-              {paginatedBlogs.map((blog, index) => (
+              {paginatedBlogs?.map((blog, index) => (
                 <BlogCardList key={blog.id} blog={blog} index={index} />
               ))}
             </div>

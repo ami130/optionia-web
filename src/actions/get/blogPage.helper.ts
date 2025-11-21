@@ -49,6 +49,7 @@ export const fetchBlogPageData = async (
     const blogs = Array.isArray(blogRes?.data?.data?.blogs)
       ? blogRes.data.data.blogs
       : [];
+
     const page = blogRes?.data?.data?.page || {};
 
     const result = {
