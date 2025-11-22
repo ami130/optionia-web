@@ -200,7 +200,10 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
                   >
                     {/* Active border highlight */}
                     {activeId === item.id && (
-                      <span className="absolute -left-0 top-0 h-full w-0.5 bg-[#854BFF]" />
+                      <span
+                        className="absolute -left-0 top-0 h-full bg-[#854BFF]"
+                        style={{ width: "1px" }}
+                      />
                     )}
 
                     {item.title}

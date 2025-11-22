@@ -8,9 +8,11 @@ const CACHE_TTL = 60 * 1000; // 1 minute
 
 export const fetchBlogPageData = async (
   search?: string,
-  categorySlug?: string
+  categorySlug?: string,
+  page: number = 1, // ✅ Internal parameter (not in URL)
+  limit: number = 9 // ✅ Internal parameter (not in URL)
 ) => {
-  const cacheKey = `blog-${search}-${categorySlug}`;
+  const cacheKey = `blog-${search}-${categorySlug}-${page}-${limit}`;
 
   // Check cache first
   const cached = cache.get(cacheKey);
@@ -33,12 +35,16 @@ export const fetchBlogPageData = async (
       cache.set("categories", { data: categories, timestamp: Date.now() });
     }
 
-    // Step 2️⃣: Build query params for API
+    // Step 2️⃣: Build query params for API - ONLY search & category in URL
     const queryParams: string[] = [];
     if (search) queryParams.push(`search=${encodeURIComponent(search)}`);
     if (categorySlug && categorySlug !== "all") {
       queryParams.push(`category=${categorySlug}`);
     }
+    // ✅ Add pagination params INTERNALLY (not in URL)
+    queryParams.push(`page=${page}`);
+    queryParams.push(`limit=${limit}`);
+
     const queryString = queryParams.length ? `?${queryParams.join("&")}` : "";
 
     // Step 3️⃣: Fetch blog page with timeout
@@ -49,14 +55,24 @@ export const fetchBlogPageData = async (
     const blogs = Array.isArray(blogRes?.data?.data?.blogs)
       ? blogRes.data.data.blogs
       : [];
+    const pagination = blogRes?.data?.data?.pagination || {};
+    const pageData = blogRes?.data?.data?.page || {};
 
-    const page = blogRes?.data?.data?.page || {};
+    console.log("📊 Pagination Data:", pagination);
 
     const result = {
-      page,
+      page: pageData,
       blogs,
       categories,
-      filters: { search, category: categorySlug }, // Include current filters
+      pagination: {
+        total: pagination.total || 0,
+        page: pagination.page || 1,
+        limit: pagination.limit || limit,
+        totalPages: pagination.totalPages || 1,
+        hasNext: pagination.hasNext || false,
+        hasPrev: pagination.hasPrev || false,
+      },
+      filters: { search, category: categorySlug }, // ✅ No page/limit in filters
     };
 
     // Cache the result
@@ -76,7 +92,15 @@ export const fetchBlogPageData = async (
       page: {},
       blogs: [],
       categories: [],
-      filters: { search, category: categorySlug },
+      pagination: {
+        total: 0,
+        page: 1,
+        limit: 9,
+        totalPages: 0,
+        hasNext: false,
+        hasPrev: false,
+      },
+      filters: { search, category: categorySlug }, // ✅ No page/limit in filters
     };
   }
 };
@@ -127,28 +151,35 @@ export const getSingleBlog = async (slug: string) => {
 //       cache.set("categories", { data: categories, timestamp: Date.now() });
 //     }
 
-//     // Step 2️⃣: Build query params
+//     // Step 2️⃣: Build query params for API
 //     const queryParams: string[] = [];
 //     if (search) queryParams.push(`search=${encodeURIComponent(search)}`);
-//     if (categorySlug && categorySlug.toLowerCase() !== "all") {
+//     if (categorySlug && categorySlug !== "all") {
 //       queryParams.push(`category=${categorySlug}`);
 //     }
 //     const queryString = queryParams.length ? `?${queryParams.join("&")}` : "";
 
 //     // Step 3️⃣: Fetch blog page with timeout
 //     const blogRes = await axiosInstance.get(`/pages/blog${queryString}`, {
-//       timeout: 5000, // 5 second timeout
+//       timeout: 5000,
 //     });
 
 //     const blogs = Array.isArray(blogRes?.data?.data?.blogs)
 //       ? blogRes.data.data.blogs
 //       : [];
+//     const pagination = blogRes?.data?.data?.pagination;
+
+//     console.log("blogRes", blogRes);
+
 //     const page = blogRes?.data?.data?.page || {};
+//     console.log("pagination", blogRes?.data?.data?.pagination);
 
 //     const result = {
 //       page,
 //       blogs,
 //       categories,
+//       pagination,
+//       filters: { search, category: categorySlug }, // Include current filters
 //     };
 
 //     // Cache the result
@@ -168,6 +199,7 @@ export const getSingleBlog = async (slug: string) => {
 //       page: {},
 //       blogs: [],
 //       categories: [],
+//       filters: { search, category: categorySlug },
 //     };
 //   }
 // };

@@ -27,8 +27,8 @@ export default function BlogCardList({
       <div className="relative w-full rounded-2xl overflow-hidden aspect-[16/9] lg:aspect-auto lg:h-[240px]">
         <Image
           src={
-            blog.thumbnailUrl
-              ? `${ENV_CONFIG.baseApi}${blog.thumbnailUrl}`
+            blog?.thumbnailUrl
+              ? `${ENV_CONFIG?.baseApi}${blog?.thumbnailUrl}`
               : img.blog1
           }
           alt={blog?.title}

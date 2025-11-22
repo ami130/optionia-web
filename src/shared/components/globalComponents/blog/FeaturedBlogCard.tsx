@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ENV_CONFIG } from "@/shared/constant/app.constant";
+import { img } from "@/shared/constant/imgExport";
 
 export default function FeaturedBlogCard({
   blog,
@@ -26,9 +27,9 @@ export default function FeaturedBlogCard({
       <div className="relative w-full rounded-2xl overflow-hidden aspect-[16/9] lg:aspect-auto lg:h-[367px]">
         <Image
           src={
-            blog.thumbnailUrl
-              ? `${ENV_CONFIG.baseApi}${blog.thumbnailUrl}`
-              : "/placeholder.png"
+            blog?.thumbnailUrl
+              ? `${ENV_CONFIG?.baseApi}+${blog?.thumbnailUrl}`
+              : img.blog1
           }
           alt={blog.title}
           fill

@@ -10,3 +10,20 @@ export const getCategories = async () => {
     throw new Error(error?.message || "Failed to Categories item");
   }
 };
+
+export const getTermsOfService = async () => {
+  try {
+    const response = await axiosInstance.get(`/terms-of-service`);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.message || "Failed to Terms of service item");
+  }
+};
+export const getPrivacyPolicy = async () => {
+  try {
+    const response = await axiosInstance.get(`/privacy-policy`);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.message || "Failed to Privacy Policy item");
+  }
+};
