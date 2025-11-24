@@ -28,7 +28,7 @@ export default function FeaturedBlogCard({
         <Image
           src={
             blog?.thumbnailUrl
-              ? `${ENV_CONFIG?.baseApi}+${blog?.thumbnailUrl}`
+              ? `${ENV_CONFIG?.baseApi}${blog?.thumbnailUrl}`
               : img.blog1
           }
           alt={blog.title}

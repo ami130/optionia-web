@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { img } from "@/shared/constant/imgExport";
+import { ENV_CONFIG } from "@/shared/constant/app.constant";
 
 type Author = {
   id: number;
@@ -14,6 +15,8 @@ type Author = {
 
 export default function BlogAuthorSection({ authors }: { authors: Author[] }) {
   const [copied, setCopied] = useState(false);
+
+  console.log("first", authors);
 
   // Avatar sizing & overlap
   const AVATAR_SIZE = 48; // px
@@ -70,8 +73,10 @@ export default function BlogAuthorSection({ authors }: { authors: Author[] }) {
 
   // fallback avatar
   const getAvatarSrc = (a: Author) => {
-    // if author has profileImage assume it's absolute or relative path allowed
-    return a.profileImage ? a.profileImage : img.aboutImg2;
+    if (a.profileImage && !a.profileImage.includes("undefined")) {
+      return `${ENV_CONFIG?.baseApi}${a.profileImage}`;
+    }
+    return img.aboutImg2; // Fallback image
   };
 
   return (
@@ -122,11 +127,14 @@ export default function BlogAuthorSection({ authors }: { authors: Author[] }) {
             <p className="text-[#111927] text-[16px]">
               Written by{" "}
               {authors?.length > 0 &&
-                authors.map((data: Author, index: number) => (
+                authors?.map((data: Author, index: number) => (
                   <span key={data.id}>
-                    <span className="text-[#111927] font-medium hover:underline hover:cursor-pointer">
+                    <Link
+                      href={`/author/${data?.username}`}
+                      className="text-[#111927] font-medium hover:underline hover:cursor-pointer"
+                    >
                       {data.username}
-                    </span>
+                    </Link>
                     {index < (authors?.length ?? 0) - 1 && ", "}
                   </span>
                 ))}

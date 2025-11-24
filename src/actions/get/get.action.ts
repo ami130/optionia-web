@@ -27,3 +27,12 @@ export const getPrivacyPolicy = async () => {
     throw new Error(error?.message || "Failed to Privacy Policy item");
   }
 };
+
+export const getAuthor = async (username: any) => {
+  try {
+    const response = await axiosInstance.get(`users/username/${username}`);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.message || "Failed to Get Author Data");
+  }
+};

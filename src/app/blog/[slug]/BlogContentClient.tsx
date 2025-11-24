@@ -131,9 +131,12 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
                 {authors?.length > 0 &&
                   authors.map((data: any, index: number) => (
                     <span key={data.id}>
-                      <span className="text-[#111927] font-medium hover:underline">
+                      <Link
+                        href={`/blog/${data?.username}`}
+                        className="text-[#111927] font-medium hover:underline"
+                      >
                         {data.username}
-                      </span>
+                      </Link>
                       {index < authors.length - 1 && ", "}
                     </span>
                   ))}
@@ -164,7 +167,10 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
             </div>
             {/* Key Takeaways */}
             <div className="border border-[#BB8AF6] rounded-2xl bg-[#FAF6FE] p-5 mt-10">
-              <div dangerouslySetInnerHTML={{ __html: keyTakeaways || "" }} />
+              <div
+                className="p-5"
+                dangerouslySetInnerHTML={{ __html: keyTakeaways || "" }}
+              />
             </div>
             {/* Blog Content */}
             <motion.div
@@ -229,10 +235,11 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
                     className="outline-none w-full"
                   />
                 </div>
-                <div className="mt-3">
+                <div className="mt-3 ">
                   <CommonPrimaryButton
                     text="Subscribe Now"
                     img={img.rightArrowWhiteIcon}
+                    className="w-full"
                   />
                 </div>
                 <p className="text-[#2C076E] text-[14px] font-normal mt-2">
@@ -252,7 +259,7 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
                 alt={promotionalData?.title}
                 width={200}
                 height={200}
-                className="rounded-xl"
+                className="rounded-xl border w-full h-[200px] object-cover"
               />
               <div className="space-y-3">
                 <p className="text-[#2C076E] text-[24px] font-medium">
@@ -274,6 +281,7 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
                   <CommonPrimaryButton
                     text="Get started for Free"
                     img={img.rightArrowWhiteIcon}
+                    className="w-full"
                   />
                 </Link>
               </div>
@@ -282,73 +290,29 @@ export default function BlogContentClient({ blogData }: { blogData: any }) {
         </div>
       </div>
       {/* relatives blogs */}
-      <div className=" py-20 space-y-12">
-        <div className=" flex items-center justify-between">
-          <p className="text-5xl font-medium">Related Blogs</p>
-          {relatedBlogs?.length > 3 && (
-            <div className=" flex justify-center ">
-              <Link href="/blog">
-                <CommonSecondaryButton
-                  text="View all"
-                  img={img.rightArrowIcon}
-                />
-              </Link>
-            </div>
-          )}
+
+      {relatedBlogs?.length > 1 && (
+        <div className=" py-20 space-y-12">
+          <div className=" flex items-center justify-between">
+            <p className="text-5xl font-medium">Related Blogs</p>
+            {relatedBlogs?.length > 3 && (
+              <div className=" flex justify-center ">
+                <Link href="/blog">
+                  <CommonSecondaryButton
+                    text="View all"
+                    img={img.rightArrowIcon}
+                  />
+                </Link>
+              </div>
+            )}
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full px-5 lg:px-0">
+            {relatedBlogs?.slice(0, 3).map((blog: any, index: number) => (
+              <FeaturedBlogCard key={blog.id} blog={blog} index={index} />
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full px-5 lg:px-0">
-          {relatedBlogs?.slice(0, 3).map((blog: any, index: number) => (
-            <FeaturedBlogCard key={blog.id} blog={blog} index={index} />
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
-}
-
-//  <div className="relative overflow-hidden flex flex-col lg:flex-row max-w-6xl mx-auto">
-//         {/* Scroll Progress Bar */}
-//         <motion.div
-//           className="fixed top-0 left-0 right-0 h-1 bg-purple-500 origin-left z-50"
-//           style={{ scaleX }}
-//         />
-//         {/* Blog Content */}
-//         <motion.div
-//           className="prose prose-lg max-w-full lg:w-3/4 px-4 py-24"
-//           initial={{ x: -50, opacity: 0 }}
-//           animate={{ x: 0, opacity: 1 }}
-//           transition={{ delay: 0.4 }}
-//           ref={contentRef}
-//         ></motion.div>
-
-//         {/* Table of Contents */}
-//         <div className="hidden lg:block w-1/4 sticky top-24 h-max px-4">
-//           <h3 className="font-bold mb-4">Contents</h3>
-//           <ul className="list-disc list-inside space-y-1">
-//             {toc.map((item) => (
-//               <li
-//                 key={item.id}
-//                 className="cursor-pointer text-blue-600 hover:underline"
-//                 onClick={() => handleTOCClick(item.id)}
-//               >
-//                 {item.title}
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       </div>
-
-{
-  /* Author & Date */
-}
-{
-  /* <motion.p
-        className="mt-12 text-sm text-gray-400 lg:w-3/4 px-4"
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.6 }}
-      >
-        By {blogData.author} · {blogData.date}
-        {blogData.readTime ? ` · ${blogData.readTime} read` : ""}
-      </motion.p> */
 }

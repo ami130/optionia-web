@@ -18,7 +18,10 @@ export default function CustomAccordion({ data }: { data: any }) {
         const isOpen = openId === item.id;
 
         return (
-          <div key={item.id} className="border border-[#E7D7FD] bg-white px-6 py-4 rounded-2xl">
+          <div
+            key={item.id}
+            className="border border-[#E7D7FD] bg-white px-6 py-4 rounded-2xl"
+          >
             {/* Trigger */}
             <button
               onClick={() => toggle(item.id)}
@@ -28,7 +31,7 @@ export default function CustomAccordion({ data }: { data: any }) {
 
               {/* + / - icon */}
               <span
-                className={`w-11 h-11 flex items-center justify-center text-lg font-bold transition-all duration-200 rounded-full ${
+                className={` w-11 h-11 flex items-center justify-center text-lg font-bold transition-all duration-200 rounded-full ${
                   isOpen
                     ? "text-white border-0"
                     : "border-[#F2E9FE] text-[#360C5F] border"

@@ -147,7 +147,7 @@ export const pricingPlans = [
     planTitle: "Free",
     plan: "Free Forever",
     price: 0,
-    type: "month",
+    discount: 0,
     currency: "$",
     popular: false,
     features: [
@@ -163,7 +163,7 @@ export const pricingPlans = [
     planTitle: "Pro",
     plan: "14 Days Trial",
     price: 9.99,
-    type: "month",
+    discount: 20, // ⭐ dynamic discount
     currency: "$",
     popular: false,
     features: [
@@ -179,7 +179,7 @@ export const pricingPlans = [
     planTitle: "Advanced",
     plan: "14-day free trial",
     price: 19.99,
-    type: "month",
+    discount: 20, // ⭐ dynamic discount
     currency: "$",
     popular: true,
     features: [
